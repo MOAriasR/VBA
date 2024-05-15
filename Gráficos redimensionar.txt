@@ -1,0 +1,36 @@
+Sub GraphResize()
+'Redimensiona el alto de los gráficos dependiendo del número de items
+Dim alto As Integer
+Dim item As Integer
+'
+item = Worksheets("Estadisticas").Range("Jugadores").Value 'nº de jugadores
+alto = 212
+'
+If item < 9 Then
+    ActiveSheet.ChartObjects("Chart 1").Activate
+    ActiveSheet.Shapes("Chart 1").Height = alto
+    ActiveSheet.ChartObjects("Chart 2").Activate
+    ActiveSheet.Shapes("Chart 2").Height = alto
+    ActiveSheet.ChartObjects("Chart 3").Activate
+    ActiveSheet.Shapes("Chart 3").Height = alto
+    Exit Sub
+ElseIf item > 9 And item <= 15 Then
+    alto = alto + ((item - 8) * 14)
+    ActiveSheet.ChartObjects("Chart 1").Activate
+    ActiveSheet.Shapes("Chart 1").Height = alto
+    ActiveSheet.ChartObjects("Chart 2").Activate
+    ActiveSheet.Shapes("Chart 2").Height = alto
+    ActiveSheet.ChartObjects("Chart 3").Activate
+    ActiveSheet.Shapes("Chart 3").Height = alto
+    Exit Sub
+ElseIf item > 15 Then
+    ActiveSheet.ChartObjects("Chart 1").Activate
+    ActiveSheet.Shapes("Chart 1").Height = 300
+    ActiveSheet.ChartObjects("Chart 2").Activate
+    ActiveSheet.Shapes("Chart 2").Height = 300
+    ActiveSheet.ChartObjects("Chart 3").Activate
+    ActiveSheet.Shapes("Chart 3").Height = 300
+    Exit Sub
+End If
+'
+End Sub

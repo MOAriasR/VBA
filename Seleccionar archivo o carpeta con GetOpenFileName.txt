@@ -1,0 +1,90 @@
+
+Sub Nombre_Archivo()
+'Procedimiento que devuelve el nombre del archivo seleccionado
+
+    Dim filtro As String
+    Dim indiceFiltro As Integer
+    Dim titulo As String
+    Dim nombreArchivo As Variant
+    
+    filtro = "Archivos PDF (*.pdf), *.pdf," & _
+        "Archivos de Excel (*.xlsx;*.xlsm),*.xlsx;*.xlsm, " & _
+            "Todos los archivos (*.*),*.*"
+
+    indiceFiltro = 2
+    
+    titulo = "Seleccionar archivo"
+    
+    nombreArchivo = Application.GetOpenFilename(filtro, indiceFiltro, titulo)
+    
+    If nombreArchivo = False Then
+        MsgBox "No se ha seleccionado ningún archivo", vbInformation, "Abrir archivo"
+        Exit Sub
+    Else
+        ActiveCell.Value = nombreArchivo
+    End If
+    
+End Sub
+
+'**************************************************************************************************
+Sub selectArchivo()
+'Procedimiento que captura el nombre de uno o más archivos seleccionados desde un cuadro de diálogo
+
+    Dim cuadroDialogo As FileDialog
+    Dim archivoSelect As Variant
+    
+    Set cuadroDialogo = Application.FileDialog(msoFileDialogFilePicker)
+    
+    cuadroDialogo.Title = "Seleccionar archivo"
+    
+    '-1=se ha seleccionado uno o más archivos
+    '0= no se ha seleccionado ningún archivo
+    If cuadroDialogo.Show = -1 Then
+    
+        For Each archivoSelect In cuadroDialogo.SelectedItems
+            MsgBox archivoSelect
+        Next archivoSelect
+        
+    End If
+    
+    Set cuadroDialogo = Nothing
+
+End Sub
+
+'**************************************************************************************************
+Sub elegirCarpeta()
+'Procedimiento que captura el nombre de una carpeta seleccionada desde un cuadro de diálogo
+
+    Dim ruta As String
+    
+    With Application.FileDialog(msoFileDialogFolderPicker)
+    
+        .InitialFileName = ThisWorkbook.Path & "\"
+        .Title = "Seleccionar carpeta"
+        .Show
+        
+        If .SelectedItems.Count = 0 Then
+           'si no se selecciona ninguna carpeta no hace nada
+        Else
+            ruta = .SelectedItems(1)
+            MsgBox ruta
+        End If
+        
+    End With
+
+End Sub
+
+'**************************************************************************************************
+Sub abrirArchivo()
+'Procedimiento que abre el archivo seleccionado
+    With Application.FileDialog(msoFileDialogOpen)
+    
+        .Filters.Clear
+        .Filters.Add "Excel y TXT", "*.xlsx, *.txt"
+        .FilterIndex = 2
+        .Show
+        .Execute
+    
+    End With
+
+End Sub

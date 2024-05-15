@@ -1,0 +1,25 @@
+    'definición de variables
+    Dim cantidad As Long
+    Dim i As Integer
+'
+    'Recorre todos los items para sumar los SubItems y almacenar el resultado en la variable correspondiente.    
+    'Ejemplo: columna 2 del Listview
+    For i = 1 To frmEditarDoc.ListView1.ListItems.Count
+        cantidad = cantidad + CLng(frmEditarDoc.ListView1.ListItems(i).SubItems(3))
+    Next i
+'    
+    'Recorre todos los items para sumar los SubItems y almacenar el resultado en la variable correspondiente.
+    Dim importe As Double
+'    
+    'Ejemplo: columna 3 del Listview
+    For i = 1 To frmEditarDoc.ListView1.ListItems.Count
+        importe = importe + CDbl(frmEditarDoc.ListView1.ListItems(i).SubItems(4))
+    Next i
+'    
+    'vuelca las variables en los controles correspondientes
+    With frmEditarDoc
+        .txtTotalCantidad.Value = cantidad
+        .txtTotalImporte.Value = importe
+        .txtTotalImporte.Value = Format(.txtTotalImporte.Value, "currency")
+        .txtTotalProductos.Value = "Productos: " & .ListView1.ListItems.Count
+    End With

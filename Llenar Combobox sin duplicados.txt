@@ -1,0 +1,20 @@
+Sheets("BASE_DATOS").Select
+'
+Dim uf As Long
+uf = nReg(Hoja3, 1, 1) - 1 'function
+'
+Dim celda As Range
+Dim ElementosUnicos As New Collection
+'
+On Error Resume Next
+Form_Consulta.ComboBox2.Clear
+'
+For Each celda In ActiveSheet.Range("E2" & ":E" & uf)
+    ElementosUnicos.Add celda.Value, CStr(celda.Value)
+Next celda
+'
+On Error GoTo 0
+'Añadir elementos no duplicados al combobox.
+For Each Item In ElementosUnicos
+    Form_Consulta.ComboBox2.AddItem Item
+Next Item

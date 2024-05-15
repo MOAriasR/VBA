@@ -1,0 +1,23 @@
+Sub AislarNumFac()
+Dim celda As Range, texto As String, coincidencia As Object
+Dim item As Variant
+Dim numfac As New VBScript_RegExp_55.RegExp
+Dim mc As MatchCollection
+
+
+With numfac
+    .IgnoreCase = True
+    .Global = False
+    .Pattern = "[0-9]{3,4}"
+End With
+
+For Each celda In Selection
+texto = celda.Value
+    Set mc = numfac.Execute(texto)
+        For Each item In mc
+            celda.Value = "Fac. " & item
+'            Debug.Print item
+        Next item
+    
+Next celda
+End Sub

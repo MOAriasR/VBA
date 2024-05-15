@@ -1,0 +1,34 @@
+On Error Resume Next
+'filtrar tabla
+With ActiveSheet.PivotTables("PivotTable4").PivotFields("Día")
+        .ClearAllFilters
+        .PivotItems("0").Visible = False
+        .PivotItems("").Visible = False
+        .PivotItems("(blank)").Visible = False
+        .PivotItems("L").Visible = True
+        .PivotItems("M").Visible = True
+        .PivotItems("R").Visible = True
+        .PivotItems("J").Visible = True
+        .PivotItems("V").Visible = True
+        .PivotItems("LV").Visible = False
+        .PivotItems("LM").Visible = False
+        .PivotItems("LR").Visible = False
+        .PivotItems("LMRJVS").Visible = False
+        .PivotItems("MJS").Visible = False
+        .PivotItems("MV").Visible = False
+        .PivotItems("LJ").Visible = False
+        .PivotItems("LRV").Visible = False
+        .PivotItems("S").Visible = False
+        .PivotItems("D").Visible = False
+    End With
+'=======================================================================
+'ordenar tabla dinámica
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("ABC")
+        .PivotItems("A").Position = 1
+        .PivotItems("B").Position = 2
+        .PivotItems("C").Position = 3
+        .PivotItems("D").Position = 4
+        .PivotItems("TV").Position = 5
+        .PivotItems("H").Position = 6
+        .PivotItems("").Visible = False
+    End With

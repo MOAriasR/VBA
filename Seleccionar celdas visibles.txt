@@ -1,0 +1,18 @@
+Sub SelecVisible()
+'
+' SelecVisible Macro
+'
+    ActiveSheet.Range("$A$5:$AP$1048576").Autofilter Field:=12, Criteria1:="=1" _
+        , Operator:=xlOr, Criteria2:="=5"
+    Range("K10").Select
+    Selection.ClearContents
+    ActiveCell.FormulaR1C1 = "1"
+    Range("K10").Select
+    Selection.Copy
+    Range("K11").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.SpecialCells(xlCellTypeVisible).Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Range("K4").Select
+End Sub

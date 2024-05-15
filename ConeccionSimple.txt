@@ -1,0 +1,27 @@
+Sub ConnectToSQLServer()
+
+    Dim cn As ADODB.Connection
+    Dim rs As ADODB.Recordset
+        
+    Set cn = New ADODB.Connection
+    
+    cn.ConnectionString = _
+        "Provider=MSOLEDBSQL;" & _
+        "Server=.\SQL2017TRAINING;" & _
+        "Database=Movies;" & _
+        "Trusted_Connection=yes;"
+    
+    cn.Open
+    
+    Set rs = New ADODB.Recordset
+    
+    rs.ActiveConnection = cn
+    rs.Source = "Actor"
+    rs.Open
+    
+    Range("A1").CopyFromRecordset rs
+    
+    rs.Close
+    cn.Close
+    
+End Sub

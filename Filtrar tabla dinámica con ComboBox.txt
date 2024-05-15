@@ -1,0 +1,11 @@
+Private Sub ComboBox1_Change()
+
+Sheets("Tabla").Select
+
+With ActiveSheet.PivotTables("TablaDinámica1").PivotFields("Año")    
+     .ClearAllFilters
+     On Error Resume Next
+     .CurrentPage = (Me.ComboBox1)        
+End With     
+
+End Sub

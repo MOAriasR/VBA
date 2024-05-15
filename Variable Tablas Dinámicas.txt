@@ -1,0 +1,16 @@
+    Dim hProd As Worksheet
+    Set hProd = Worksheets("Productos")
+    
+    Dim PT As PivotTable
+    Set PT = hProd.PivotTables("TablaDinámica1")
+    
+    Dim PF As PivotField
+    Set PF = PT.PivotFields("Canal")
+    
+    'Por tanto PF = Worksheets("Productos").PivotTables("TablaDinámica1").PivotFields("Canal")
+
+            With PF
+                    .ClearAllFilters
+                    On Error Resume Next
+                    .CurrentPage = "Tienda"
+            End With

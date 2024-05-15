@@ -1,0 +1,22 @@
+SELECT dbo.Asociaciones.CtaSup, CuentasPadre.CtaMayor AS CtaMayorPadre,
+       dbo.Cuentas.Codigo, dbo.Cuentas.CtaMayor, dbo.Cuentas.Nombre,
+       dbo.Cuentas.NomIdioma, dbo.SaldosCuentas.Importes1 AS Enero,
+       dbo.SaldosCuentas.Importes2 AS Febrero, dbo.SaldosCuentas.Importes3 AS Marzo,
+       dbo.SaldosCuentas.Importes4 AS Abril, dbo.SaldosCuentas.Importes5 AS Mayo,
+       dbo.SaldosCuentas.Importes6 AS Junio, dbo.SaldosCuentas.Importes7 AS Julio,
+       dbo.SaldosCuentas.Importes8 AS Agosto,
+       dbo.SaldosCuentas.Importes9 AS Septiembre,
+       dbo.SaldosCuentas.Importes10 AS Octubre,
+       dbo.SaldosCuentas.Importes11 AS Noviembre,
+       dbo.SaldosCuentas.Importes12 AS Diciembre
+FROM   dbo.Cuentas
+       INNER JOIN dbo.Asociaciones ON dbo.Cuentas.Codigo = dbo.Asociaciones.SubCtade
+       INNER JOIN dbo.Cuentas AS CuentasPadre ON dbo.Asociaciones.CtaSup = CuentasPadre.Codigo
+       INNER JOIN dbo.SaldosCuentas ON dbo.Cuentas.Id = dbo.SaldosCuentas.IdCuenta
+       INNER JOIN dbo.Ejercicios ON dbo.SaldosCuentas.Ejercicio = dbo.Ejercicios.Id
+ 
+WHERE  (dbo.SaldosCuentas.Tipo = 1)
+       AND (dbo.Asociaciones.CtaSup LIKE '%[0-9]%')
+       AND (dbo.Ejercicios.Ejercicio = 2020)
+ 
+ORDER BY dbo.Asociaciones.SubCtade, dbo.Cuentas.Codigo

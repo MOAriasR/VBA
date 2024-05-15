@@ -1,0 +1,5 @@
+Dim Ciudad As String
+Ciudad = Me.cbo_Ciudad.Value
+'
+Sheets("BaseDatos").Select
+ActiveSheet.ListObjects("Table1").Range.AutoFilter Field:=7, Criteria1:=Ciudad

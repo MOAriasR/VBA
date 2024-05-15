@@ -1,0 +1,13 @@
+Sub ShowResolution()
+Dim ApplicationWidth As Integer
+Dim ApplicationHeight As Integer
+'
+Application.WindowState = xlMaximized
+'
+ApplicationWidth = Application.Width
+ApplicationHeight = Application.Height
+Form_Panel_control.lblResolution.Caption = (CStr(ApplicationWidth) & " x " & CStr(ApplicationHeight))
+'
+'MsgBox (CStr(ApplicationWidth) & " x " & CStr(ApplicationHeight))
+'
+End Sub

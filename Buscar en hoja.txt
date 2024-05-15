@@ -1,0 +1,23 @@
+'Definir variable para almacenar el dato a buscar
+'ejemplo: id
+'
+Sheets("Estadisticas").Select
+ActiveSheet.Range("A1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+
+Cells.Find(What:=id, After:=ActiveCell, LookIn:=xlValues, _
+LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext, _
+MatchCase:=False, SearchFormat:=False).Activate
+'=====================================================================================================
+'Chequea que la palabra introducida no exista en la base de datos
+Dim Nueva as String
+On Error GoTo salto
+    Sheets("BaseDatos").Select
+    Columns("A:A").Select
+    Selection.Find(What:=Nueva, After:=ActiveCell, LookIn:=xlValues, LookAt _
+    :=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False).Activate
+
+    MsgBox "La palabra '" & Nueva & "' ya existe. Inténtalo con otra.", vbExclamation, "Palabra existente"
+    Me.TextBox1.SetFocus
+    Exit Sub

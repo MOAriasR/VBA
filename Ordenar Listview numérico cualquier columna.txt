@@ -1,0 +1,89 @@
+Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+'Cuando al ordenar una columna numérica de un listview, ésta se ordena como si fuera texto.
+'Ejemplo: 1, 23, 5 en vez de 1, 5, 23.
+'Lo que hace este código es convertirlo a texto añadiendo ceros delante, ordenarlo y volver a
+'convertirlo en número.
+   
+If ListView1.ListItems.Count = 0 Then Exit Sub
+ListView1.Sorted = True
+ListView1.SortKey = ColumnHeader.Index - 1
+
+        Dim l As Long
+        Dim strFormat As String
+        Dim strData() As String
+        
+        Dim lngIndex As Long
+        lngIndex = ColumnHeader.Index - 1
+            
+            ' Sort Numerically
+        
+            strFormat = String(30, "0") & "." & String(30, "0")
+        
+            ' Loop through the values in this column. Re-format the values so as they
+            ' can be sorted alphabetically, having already stored their visible
+            ' values in the tag, along with the tag's original value
+            With ListView1
+            With .ListItems
+                If (lngIndex > 0) Then
+                    For l = 1 To .Count
+                        With .Item(l).ListSubItems(lngIndex)
+                            .Tag = .Text & Chr$(0) & .Tag
+                            If IsNumeric(.Text) Then
+                                If CDbl(.Text) >= 0 Then
+                                    .Text = Format(CDbl(.Text), _
+                                        strFormat)
+                                End If
+                            Else
+                                .Text = ""
+                            End If
+                        End With
+                    Next l
+                Else
+                    For l = 1 To .Count
+                        With .Item(l)
+                            .Tag = .Text & Chr$(0) & .Tag
+                            If IsNumeric(.Text) Then
+                                If CDbl(.Text) >= 0 Then
+                                    .Text = Format(CDbl(.Text), _
+                                        strFormat)
+                                End If
+                            Else
+                                .Text = ""
+                            End If
+                        End With
+                    Next l
+                End If
+            End With
+            
+            ' Sort the list alphabetically by this column
+            
+            .SortOrder = (.SortOrder + 1) Mod 2
+            .SortKey = ColumnHeader.Index - 1
+            .Sorted = True
+            
+            ' Restore the previous values to the 'cells' in this
+            ' column of the list from the tags, and also restore
+            ' the tags to their original values
+            
+            With .ListItems
+                If (lngIndex > 0) Then
+                    For l = 1 To .Count
+                        With .Item(l).ListSubItems(lngIndex)
+                            strData = Split(.Tag, Chr$(0))
+                            .Text = strData(0)
+                            .Tag = strData(1)
+                        End With
+                    Next l
+                Else
+                    For l = 1 To .Count
+                        With .Item(l)
+                            strData = Split(.Tag, Chr$(0))
+                            .Text = strData(0)
+                            .Tag = strData(1)
+                        End With
+                    Next l
+                End If
+            End With
+        End With
+
+End Sub

@@ -1,0 +1,6 @@
+Private Sub UserForm_Activate()
+'Lanzará macro para balancear las semanas de servicio
+Application.Wait (Now + TimeValue("0:00:01"))
+Application.Run "Preparar_Balance"
+
+End Sub

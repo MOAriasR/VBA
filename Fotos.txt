@@ -1,0 +1,10 @@
+ On Error GoTo etiqueta
+    Me.Img_Contact.Picture = LoadPicture(ThisWorkbook.path & "\Fotos\" & Me.txt_ID.Text & ".jpg")
+    ActiveCell.Offset(0, 16).Value = Me.txt_ID.Text
+    Me.Repaint
+    Application.ScreenUpdating = True
+    Exit Sub
+'
+etiqueta:
+Me.Img_Contact.Picture = LoadPicture(ThisWorkbook.path & "\Fotos\" & "contact.ico")
+Me.Repaint

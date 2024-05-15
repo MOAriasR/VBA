@@ -1,0 +1,57 @@
+Private Sub UserForm_Initialize()
+Dim FilaIni As Long
+Dim UFila As Long
+Dim pos As Long
+Dim lv_item As Long 'número del item en el ListView
+Dim fila As Long
+'
+Dim Item As ListItem
+'damos valores al inicio y fin de los datos
+FilaIni = 2: UFila = 11
+'
+pos = 2
+lv_item = 1
+With ListView1
+     'esta propiedad indica que tendremos encabezados
+    .View = lvwReport
+     'definimos cuáles serán los encabezados
+    With .ColumnHeaders
+        .Clear  'primero limpiamos..
+        'y leugo añadimos Nombre del campo y su ancho
+        '.Add(index, key, text, width, alignment, icon)
+        .Add Text:="Fecha", Width:=60
+        .Add Text:="Región", Width:=60
+        .Add Text:="Unidades", Width:=60
+        .Add Text:="Control", Width:=40
+    End With
+    'dejamos a la vista los encabezados
+    .HideColumnHeaders = False
+    'damos aspecto 3d
+    .Appearance = cc3D
+    'habilitamos que al marcar un elemento se selecciona la fila entera
+    .FullRowSelect = True
+  '  
+    'recorremos la hoja de cálculo
+    'donde están los datos.. y los cargamos al ListView
+    For fila = FilaIni To UFila
+        If Cells(pos, "D").Value = "Sí" Then
+            Set Item = .ListItems.Add(Text:=Cells(pos, "A").Value)
+            Item.ListSubItems.Add Text:=Cells(pos, "B").Value
+            Item.ListSubItems.Add Text:=Cells(pos, "C").Value
+            Item.ListSubItems.Add Text:=Cells(pos, "D").Value
+            'damos color a la fila
+            Item.ForeColor = vbBlue
+            For x = 1 To Item.ListSubItems.Count
+                Item.ListSubItems.Item(x).ForeColor = vbBlue
+            Next x
+        Else
+            Set Item = .ListItems.Add(Text:=Cells(pos, "A").Value)
+            Item.ListSubItems.Add Text:=Cells(pos, "B").Value
+            Item.ListSubItems.Add Text:=Cells(pos, "C").Value
+            Item.ListSubItems.Add Text:=Cells(pos, "D").Value
+        End If
+        lv_item = lv_item + 1
+        pos = pos + 1
+    Next fila
+End With
+End Sub

@@ -1,0 +1,16 @@
+On Error Resume Next
+Sheets("Tabla").Select
+ThisWorkbook.RefreshAll
+'
+Dim Rango1 As Integer
+Rango1 = ActiveSheet.Range("Contador1").Value
+'contador es una celda donde cuenta el número de filas con datos para incorporar al gráfico1
+    'graf1 rango dinámico
+    ActiveSheet.ChartObjects("Graf1").Activate
+    ActiveChart.SetSourceData Source:=Range("J2" & ":K" & Rango1)
+    'Gráfico 1
+    ActiveSheet.ChartObjects("Graf1").Activate
+    Set graficoactivo1 = Sheets("Tabla").ChartObjects(1).Chart
+    NombreGIF1 = ThisWorkbook.path & "\Graph1.gif"
+    graficoactivo1.Export Filename:=NombreGIF1, FilterName:="GIF"
+    Form_Estad.Image1.Picture = LoadPicture(NombreGIF1)

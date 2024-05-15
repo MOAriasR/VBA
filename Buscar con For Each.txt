@@ -1,0 +1,11 @@
+Dim celda As Range
+
+Sheets("BaseDatos").Select
+ActiveSheet.Range("A1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+For Each celda In Selection
+    If celda.Value = x Then
+        celda.Select
+    End If
+Next celda

@@ -1,0 +1,7 @@
+Private Sub Image2_Click()
+Application.DisplayAlerts = False
+'
+Unload Me
+Application.WindowState = xlMinimized
+Shell "C:\Program Files (x86)\RTS\Transportation Suite\tsappldr.exe", vbMaximizedFocus
+End Sub

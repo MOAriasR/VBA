@@ -1,0 +1,6 @@
+Private Sub ListView1_ItemClick(ByVal Item As MSComctlLib.ListItem)
+'Devuelve el valor de la tercera columna de un listview
+Dim columna As String
+columna = Me.ListView1.ListItems(i).SubItems(3)
+End Sub
+

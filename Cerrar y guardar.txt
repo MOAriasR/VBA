@@ -1,0 +1,14 @@
+On Error Resume Next
+Application.ScreenUpdating = False
+
+If MsgBox("¿Deseas guardar los cambios?", vbInformation + vbYesNo, "Atención") = vbYes Then
+    Application.DisplayAlerts = False
+    Unload Me
+'    Application.WindowState = xlMinimized
+    ActiveWorkbook.Close savechanges:=True
+Else
+    Application.DisplayAlerts = False
+     Unload Me
+'     Application.WindowState = xlMinimized
+    ActiveWorkbook.Close savechanges:=False
+End If

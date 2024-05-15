@@ -1,0 +1,10 @@
+    Me.textbox1 = Sheets("Estudio").Range("AK42").Value
+    Me.textbox1 = Format(Me.textbox1.Value, "0.0")'decimal
+    Me.textbox2 = Sheets("Estudio").Range("AK35").Value
+    Me.textbox2 = Format(Me.textbox2.Value, "0.0%") 'porcentaje
+    Me.textbox3 = Sheets("Estudio").Range("AK37").Value
+    Me.textbox3 = Format(Me.textbox2.Value, "#,000" & Chr(128)) 'moneda
+    Me.textbox4 = Sheets("Estudio").Range("AK33").Value
+    Me.textbox4 = Format(Me.textbox4.Value, "0") 'entero
+    Me.textbox4 = Format(Me.textbox4.Value, "0,000") 'miles
+

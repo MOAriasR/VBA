@@ -1,0 +1,23 @@
+Sub crearCarpeta()
+'crea una nueva carpeta en la ruta del archivo actual
+Application.ScreenUpdating = False
+
+    Dim carpeta As String
+    Dim ruta As String
+    
+    carpeta = "MiCarpeta"
+    ruta = Application.ThisWorkbook.Path & "\" & carpeta
+
+    Dim fdObj As Object
+    
+    Set fdObj = CreateObject("Scripting.FileSystemObject")
+    If fdObj.FolderExists(ruta) Then
+        MsgBox "Ya existe", vbInformation, "Ven, mira y aprende"
+    Else
+        fdObj.CreateFolder (ruta)
+        MsgBox "It has been created.", vbInformation, "Ven, mira y aprende"
+    End If
+    
+Application.ScreenUpdating = True
+
+End Sub

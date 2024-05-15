@@ -1,0 +1,43 @@
+Sub guardarHoja()
+'Procedimiento que copia la hoja activa en un nuevo libro y lo guarda con el nombre de la hoja copiada
+
+Dim nombreHoja As String
+Dim guardarComo As Variant
+Dim nombreArchivo As String
+Dim extension As String
+
+nombreHoja = ActiveSheet.Name
+ActiveSheet.Select
+ActiveSheet.Copy
+nombreArchivo = ActiveWorkbook.Name
+
+guardarComo = Application.GetSaveAsFilename(InitialFileName:=nombreHoja, _
+    FileFilter:="Libro de Excel (*.xlsx), *.xlsx, Libro de Excel habilitado para macros (*.xlsm),*.xlsm," & _
+        "CSV (delimitado por comas) (*.csv),*.csv", _
+            Title:="Guardar hoja como archivo nuevo")
+    
+If guardarComo = False Then
+    Workbooks(nombreArchivo).Close savechanges:=False       'si cancelar
+Else
+    With Application.WorksheetFunction
+        extension = .Trim(Right(.Substitute(guardarComo, ".", .Rept(" ", 500)), 500))
+    End With
+    
+    Select Case extension
+        Case Is = "xlsx"
+            ActiveWorkbook.SaveAs guardarComo
+        
+        Case Is = "xlsm"
+            ActiveWorkbook.SaveAs guardarComo, xlOpenXMLWorkbookMacroEnabled
+            
+        Case Is = "csv"
+            ActiveWorkbook.SaveAs guardarComo, xlCSV
+            
+        Case Else
+            ActiveWorkbook.SaveAs guardarComo
+            
+    End Select
+    
+End If
+
+End Sub

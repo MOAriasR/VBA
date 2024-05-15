@@ -1,0 +1,14 @@
+Sub killFile()
+'elimina la foto del contacto
+Dim path1 As String
+'
+On Error GoTo salida
+    '
+path1 = ThisWorkbook.path & "\Fotos" & "\" & X & ".jpg"
+Kill path1
+Exit Sub
+'
+salida:
+Exit Sub
+'
+End Sub

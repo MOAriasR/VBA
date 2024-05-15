@@ -1,0 +1,11 @@
+On Error GoTo ErrorRutero
+Workbooks.Open ThisWorkbook.Path & "\" & "archivo1.xlsb"
+Windows("archivo1.xlsb").Activate
+Sheets("Hoja").Select
+'=====================================================================================
+ErrorRutero:
+MsgBox "No se ha encontrado el archivo archivo1.xlsb o éste está abierto." _
+& vbNewLine & "Ciérralo y asegúrate de que el archivo se encuentra en la carpeta actual" _
+& vbNewLine & "y que el nombre del archivo sea exacto." _
+& vbNewLine & "Una vez revisado, vuelve a lanzar la Exportación", vbExclamation, "No se encuentra el Archivo"
+

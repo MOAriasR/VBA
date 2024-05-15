@@ -1,0 +1,8 @@
+Sub vInmediato()
+    
+    Dim nombre As String
+    nombre = "Juan"
+  '  
+    Debug.Print nombre
+
+End Sub

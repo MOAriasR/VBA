@@ -1,0 +1,10 @@
+'ordenar tabla dinámica
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("ABC")
+        .PivotItems("A").Position = 1
+        .PivotItems("B").Position = 2
+        .PivotItems("C").Position = 3
+        .PivotItems("D").Position = 4
+        .PivotItems("TV").Position = 5
+        .PivotItems("H").Position = 6
+        .PivotItems("").Visible = False
+    End With

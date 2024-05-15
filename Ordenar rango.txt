@@ -1,0 +1,22 @@
+Sub Ordenar()
+' Ordenar base de datos
+Dim uf As Integer
+uf = nReg(Hoja1, 1, 2) - 1 'function
+'
+'ordena por la columna B
+    Sheets("BaseDatos").Select
+    Columns("A:B").Select
+    ActiveWorkbook.Worksheets("BaseDatos").Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("BaseDatos").Sort.SortFields.Add Key:=Range( _
+        "B2" & ":B" & uf), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    With ActiveWorkbook.Worksheets("BaseDatos").Sort
+        .SetRange Range("A1" & ":B" & uf)
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+'
+End sub

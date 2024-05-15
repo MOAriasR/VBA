@@ -1,0 +1,78 @@
+Private Sub UserForm_Activate()
+'
+Me.ProgressBar1.Max = 6
+Me.ProgressBar1.Min = 1
+'
+Dim i As Integer
+i = 1
+'
+Me.ProgressBar1 = i
+Application.EnableEvents = True
+DoEvents
+'
+For i = 1 To 1
+    Me.ProgressBar1 = i
+    ***CÓDIGO***
+    Me.ProgressBar1 = i + 1
+    Me.CheckBox1.Value = True
+    Me.Label1.Visible = True
+'    Me.Label1.Caption = "Preparación...20%"
+    Application.EnableEvents = True
+    DoEvents
+Next i
+'
+For i = 2 To 2
+    Me.ProgressBar1 = i
+        ***CÓDIGO***
+    Me.ProgressBar1 = i + 1
+    Me.CheckBox2.Enabled = True
+    Me.CheckBox2.Value = True
+    Me.Label2.Visible = True
+'    Me.Label1.Caption = "Clientes P2,T2 y PT4...30%"
+    Application.EnableEvents = True
+    DoEvents
+Next i
+'
+For i = 3 To 3
+    Me.ProgressBar1 = i
+           ***CÓDIGO***
+    Me.ProgressBar1 = i + 1
+    Me.CheckBox3.Enabled = True
+    Me.CheckBox3.Value = True
+    Me.Label3.Visible = True
+'    Me.Label1.Caption = "Clientes P3...60%"
+    Application.EnableEvents = True
+    DoEvents
+Next i
+'
+For i = 4 To 4
+    Me.ProgressBar1 = i
+            ***CÓDIGO***
+    Me.ProgressBar1 = i + 1
+    Me.CheckBox4.Enabled = True
+    Me.CheckBox4.Value = True
+    Me.Label4.Visible = True
+'    Me.Label1.Caption = "Clientes P1 y PT2...85%"
+    Application.EnableEvents = True
+    DoEvents
+Next i
+'
+For i = 5 To 5
+    Me.ProgressBar1 = i
+            ***CÓDIGO***
+    Me.ProgressBar1 = 6
+    Me.CheckBox5.Enabled = True
+    Me.CheckBox5.Value = True
+    Me.Label5.Visible = True
+    Application.EnableEvents = True
+    DoEvents
+Next i
+'
+'Me.Label1.Caption = "Procesando...100%"
+    Me.CheckBox6.Enabled = True
+    Me.CheckBox6.Value = True
+    Me.Label6.Visible = True
+Application.Wait (Now + TimeValue("0:00:02"))
+Unload Me
+'
+End Sub

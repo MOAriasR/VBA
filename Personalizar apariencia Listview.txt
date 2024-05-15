@@ -1,0 +1,85 @@
+Private Sub Opt_10_Click()
+Application.ScreenUpdating = False
+On Error Resume Next
+    Me.ListView1.Font.Size = 10
+    
+    Worksheets("SetUp").Range("Tamanyos").ClearContents
+    Worksheets("SetUp").Range("diez").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+'===============================================================================================
+Private Sub Opt_3D_Click()
+
+Application.ScreenUpdating = False
+    Me.ListView1.Appearance = cc3D
+    Worksheets("SetUp").Range("Flat").Value = ""
+    Worksheets("SetUp").Range("TresD").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+'===============================================================================================
+Private Sub Opt_Flat_Click()
+Application.ScreenUpdating = False
+    Me.ListView1.Appearance = ccFlat
+    Worksheets("SetUp").Range("Flat").Value = 1
+    Worksheets("SetUp").Range("TresD").Value = ""
+Application.ScreenUpdating = True
+'===============================================================================================
+Private Sub Opt_amarillo_Click()
+Application.ScreenUpdating = False
+On Error Resume Next
+    Me.ListView1.BackColor = vbYellow
+    Me.ListView1.ForeColor = vbBlack
+    
+    Worksheets("SetUp").Range("Fondos").ClearContents
+    Worksheets("SetUp").Range("Amarillo").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+'===============================================================================================
+Private Sub Opt_arial_Click()
+Application.ScreenUpdating = False
+    Me.ListView1.Font.Name = "Arial"
+    
+    Worksheets("SetUp").Range("Fuentes").ClearContents
+    Worksheets("SetUp").Range("Arial").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+'===============================================================================================
+Private Sub Opt_sans_Click()
+Application.ScreenUpdating = False
+On Error Resume Next
+    Me.ListView1.Font.Name = "MS Sans Serif"
+    
+    Worksheets("SetUp").Range("Fuentes").ClearContents
+    Worksheets("SetUp").Range("Sans").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+'===============================================================================================
+Private Sub Opt_tah_Click()
+
+Application.ScreenUpdating = False
+On Error Resume Next
+    Me.ListView1.Font.Name = "Tahoma"
+    
+    Worksheets("SetUp").Range("Fuentes").ClearContents
+    Worksheets("SetUp").Range("Tahoma").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+'===============================================================================================
+Private Sub Opt_verdana_Click()
+Application.ScreenUpdating = False
+On Error Resume Next
+    Me.ListView1.Font.Name = "Verdana"
+    
+    Worksheets("SetUp").Range("Fuentes").ClearContents
+    Worksheets("SetUp").Range("Verdana").Value = 1
+Application.ScreenUpdating = True
+
+End Sub
+
+'===============================================================================================

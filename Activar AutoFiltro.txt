@@ -1,0 +1,11 @@
+Sub AutoFiltro()
+' Activa o Desactiva el AutoFiltro dependiendo de si está o no está activo
+
+    If Worksheets("BBDD").AutoFilterMode Then
+        'nada
+    Else
+        Worksheets("BBDD").Range("a1").AutoFilter
+        
+    End If
+
+End Sub

@@ -1,0 +1,36 @@
+Sub FilterInboxItems()
+
+    Dim ol As Outlook.Application
+    Dim ns As Outlook.Namespace
+    Dim fol As Outlook.Folder
+    Dim i As Object
+    Dim mi As Outlook.MailItem
+    Dim FilterString As String
+    
+    Set ol = New Outlook.Application
+    Set ns = ol.GetNamespace("MAPI")
+    Set fol = ns.GetDefaultFolder(olFolderInbox)
+    
+'    FilterString = "[Importance] = 2"
+'    FilterString = "[Size] >= 100000"
+'    FilterString = "[Size] < 100000 AND [Importance] = 0"
+'    FilterString = "[Size] >= 100000 OR [Importance] = 0"
+'    FilterString = "[Unread] = True"
+'    FilterString = "[SenderName] = 'Wise Owl'"
+'    FilterString = "[ReceivedTime] < '24/05/2019'"
+    
+    FilterString = "[ReceivedTime] >= '24 May 2019 12:00' AND [ReceivedTime] < '25 May 2019 00:00'"
+    
+    For Each i In fol.Items.Restrict(FilterString)
+    
+        If i.Class = olMail Then
+        
+            Set mi = i
+            
+            Debug.Print mi.SenderName, mi.ReceivedTime, mi.Subject, mi.Importance, mi.Size, mi.UnRead
+        
+        End If
+    
+    Next i
+    
+End Sub

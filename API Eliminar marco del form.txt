@@ -1,0 +1,35 @@
+'API para eliminar el marco y el caption del form menú
+'Declarar estas funciones en el userform
+#If VBA7 And Win64 Then
+    Private Declare PtrSafe Function FindWindow Lib "User32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+    Private Declare PtrSafe Function GetWindowLong Lib "User32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
+    Private Declare PtrSafe Function SetWindowLong Lib "User32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+    Private Declare PtrSafe Function DrawMenuBar Lib "User32" (ByVal hwnd As Long) As Long
+#Else
+    Private Declare Function FindWindow Lib "User32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+    Private Declare  Function GetWindowLong Lib "User32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
+    Private Declare  Function SetWindowLong Lib "User32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+    Private Declare  Function DrawMenuBar Lib "User32" (ByVal hwnd As Long) As Long
+#End If
+'=====================================================================================================================
+'y esto en el initialize:
+Private Sub UserForm_Initialize()
+Me.StartUpPosition = 2
+'
+'eliminar el marco y el caption del formulario
+    Dim lStyle As Long
+    Dim hMenu As Long
+    Dim mhWndForm As Long
+ '       
+    mhWndForm = FindWindow("ThunderDFrame", Me.Caption)
+    lStyle = GetWindowLong(mhWndForm, -16)
+    lStyle = lStyle And Not &HC00000
+    SetWindowLong mhWndForm, -16, lStyle
+    DrawMenuBar mhWndForm
+'
+End Sub
+
+64 bits
+Private Declare PtrSafe Function FindWindow Lib "User32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+
+PtrSafe 

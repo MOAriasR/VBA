@@ -1,0 +1,94 @@
+Sub LineaTiempo()
+'
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").ClearDateFilter
+    
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").Slicers("FechaVenta 1" _
+        ).TimelineViewState.Level = xlTimelineLevelYears
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/01/2019", "31/12/2019"
+        
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").Slicers("FechaVenta 1" _
+        ).TimelineViewState.Level = xlTimelineLevelQuarters
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/01/2019", "31/03/2019"
+        
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/04/2019", "30/06/2019"
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/01/2019", "30/06/2019"
+        
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").Slicers("FechaVenta 1" _
+        ).TimelineViewState.Level = xlTimelineLevelMonths
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/01/2019", "31/01/2019"
+        
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/02/2019", "28/02/2019"
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/03/2019", "31/03/2019"
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange "01/01/2019", "31/03/2019"
+        
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").ClearDateFilter
+    
+End Sub
+__________________________________________________________________________________________
+
+Sub TiempoAnyo()
+
+Dim anyoD As String
+Dim anyoH As String
+
+anyoD = "01/01/2019"
+anyoH = "31/12/2019"
+
+ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").ClearDateFilter
+
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").Slicers("FechaVenta 1" _
+        ).TimelineViewState.Level = xlTimelineLevelYears
+        On Error Resume Next
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange anyoD, anyoH
+        
+End Sub
+
+__________________________________________________________________________________________
+
+Sub TiempoQuarter(ByVal trim As Integer)
+Application.ScreenUpdating = False
+Dim Anyo As Integer
+
+If Form_Principal.comboAnyo.Value = "" Then
+    Anyo = Year(Date)
+Else
+    Anyo = Form_Principal.comboAnyo.Value
+End If
+
+Dim trimD As String
+Dim trimH As String
+
+If trim = 1 Then
+    trimD = "01/01/" & Anyo
+    trimH = "31/03/" & Anyo
+ElseIf trim = 2 Then
+    trimD = "01/04/" & Anyo
+    trimH = "30/06/" & Anyo
+ElseIf trim = 3 Then
+    trimD = "01/07/" & Anyo
+    trimH = "30/09/" & Anyo
+Else
+    trimD = "01/10/" & Anyo
+    trimH = "31/12/" & Anyo
+End If
+
+
+'ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").ClearDateFilter
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").Slicers("FechaVenta_1" _
+        ).TimelineViewState.Level = xlTimelineLevelQuarters
+        On Error Resume Next
+    ActiveWorkbook.SlicerCaches("NativeTimeline_FechaVenta").TimelineState. _
+        SetFilterDateRange trimD, trimH
+
+Application.ScreenUpdating = True
+
+End Sub

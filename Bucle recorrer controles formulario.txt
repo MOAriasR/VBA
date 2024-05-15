@@ -1,0 +1,17 @@
+'Recorre los controles de un formulario y cambia propiedades de los label si cumplen los criterios:
+'
+Dim inicial As Integer
+inicial = Worksheets("Cal").Range("D10").Value
+'
+'bucle que recorre los controles del formulario
+    For Each Control In Me.Controls
+'      
+        If TypeOf Control Is MSForms.Label Then				'criterio 1
+            If Control.Tag = "Dias" And Control.Caption = inicial Then	'criterio 2 y 3
+                Control.ForeColor = vbBlue
+                Control.BackColor = vbGreen
+            End If
+        End If
+'        
+    Next Control
+

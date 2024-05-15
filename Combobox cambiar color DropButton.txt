@@ -1,0 +1,3 @@
+Private Sub cbo_Categ_DropButtonClick()
+Me.cbo_Categ.ForeColor = &H80000008
+End Sub

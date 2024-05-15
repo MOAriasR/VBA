@@ -1,0 +1,35 @@
+Sub MostrarFormaMensaje(mensaje As String)
+
+
+With Hoja1.Shapes("aviso")
+ .TextFrame2.TextRange.Characters.Text = mensaje
+    .Visible = msoCTrue
+End With
+DoEvents
+  Application.Wait (Now() + TimeValue(Espera))
+With Hoja1.Shapes("aviso")
+    .TextFrame2.TextRange.Characters.Text = ""
+    .Visible = msoFalse
+End With
+End Sub
+
+Sub MuestraMensajeRegistro(mens As String)
+Dim i As Integer
+Dim retardo, inicio As Double
+
+With Hoja1.Shapes("aviso")
+    .Visible = msoCTrue
+    .TextFrame2.TextRange.Characters.Text = mens
+        For i = 1 To 120
+            .Fill.Transparency = i / 120
+            retardo = 0.012
+            inicio = Timer
+            Do
+            DoEvents
+            Loop While Timer - inicio < retardo
+        Next i
+    .Visible = msoFalse
+    .TextFrame2.TextRange.Characters.Text = ""
+End With
+
+End Sub

@@ -1,0 +1,20 @@
+Sub borrafilas()
+Dim fila As Long
+Dim max As Long
+fila = 1
+
+'Selecciono la última celda de la hoja y subo hasta la última celda con datos
+Sheets("Pegar").Select
+ActiveSheet.Range("A1048576").End(xlUp).Select
+max = Selection.Row
+'
+'repite el bucle mientras no se alcance la última fila
+ Do While fila < max
+     If Cells(fila, 1) = 0 Then                'Si la celda está vacía
+         Cells(fila, 1).EntireRow.Delete
+         max = max - 1                         'disminuimos la última fila porque hemos eliminado una por medio,                                                                    'para eliminar un bucle infinito al final
+     Else
+         fila = fila + 1
+     End If
+ Loop
+End Sub

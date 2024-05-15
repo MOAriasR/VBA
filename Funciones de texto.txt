@@ -1,0 +1,17 @@
+Sub FuncionesDeTexto()
+
+Range("C4").Value = InStr(Range("C2"), Range("C3"))                         'En qué posición está una cadena dentro de otra cadena
+Range("C6").Value = LCase(Range("B6"))
+Range("C7").Value = UCase(Range("B7"))
+Range("C8").Value = Left(Range("B8"), 5)
+Range("C9").Value = Right(Range("B9"), 6)
+Range("C10").Value = Mid(Range("B10"), 6, 10)                               'Empezando en el caracter 6 devolver los siguientes 10 caracteres
+Range("C11").Value = Len(Range("B11"))                                      'Devuelve el num de caracteres del texto
+Range("C12").Value = Replace(Range("B12"), "de", "para")                    'Reemplaza un texto por otro
+Range("C13").Value = StrConv(Range("B13"), vbLowerCase)                     'minúsculas
+Range("C14").Value = StrConv(Range("B14"), vbUpperCase)                     'mayúsculas
+Range("C15").Value = StrConv(Range("B15"), vbProperCase)                    'primera en mayúscula
+Range("C16").Value = Trim(Range("B16"))                                     'quita espacios al principio y final del texto
+Range("C16").Value = Application.WorksheetFunction.Trim(Range("B16"))       'quita todos los espacios excesivos del texto
+
+End Sub

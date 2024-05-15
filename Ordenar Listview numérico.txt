@@ -1,0 +1,28 @@
+Cuando al ordenar una columna numérica de un listview, ésta se ordena como si fuera texto.
+Ejemplo: 1, 23, 5 en vez de 1, 5, 23.
+
+Lo que hace este código es convertirlo a texto añadiendo ceros delante, ordenarlo y volver a
+convertirlo en número.
+'
+'Evento ColumnClick del listview:
+Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+Dim i As Integer
+With ListView1
+    .SortOrder = IIf(.SortOrder = lvwAscending, lvwDescending, lvwAscending)
+    If ColumnHeader.Index = 1 Then ' primera columna
+        ' convertir el número a una cadena de 20 caracteres
+        For i = 1 To .ListItems.Count
+            .ListItems.Item(i) = String(20 - Len(.ListItems.Item(i)), "0") & .ListItems.Item(i)
+        Next i
+        ' ordenarlo
+        .Sorted = True
+        ' restaurar formato número
+        For i = 1 To .ListItems.Count
+            .ListItems.Item(i) = Val(.ListItems.Item(i))
+        Next i
+    End If
+    ' seleccionar la 1ª fila
+    .ListItems(1).Selected = True
+    .ListItems(1).EnsureVisible
+End With
+End Sub

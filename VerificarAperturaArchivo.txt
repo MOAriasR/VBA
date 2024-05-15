@@ -1,0 +1,21 @@
+Sub VerificaArchivo(archivo As String)
+Dim item As Workbook
+Dim abierto As Boolean
+Dim ruta As String
+
+ruta = ThisWorkbook.Path & "\" & archivo
+
+abierto = False
+
+For Each item In Workbooks
+    If item.Name = archivo Then
+    abierto = True
+    Exit For
+    End If
+Next item
+
+If abierto = False Then
+    Workbooks.Open (ruta)
+End If
+
+End Sub

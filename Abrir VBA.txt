@@ -1,0 +1,5 @@
+Sub Visual()
+'Abre el editor de Visual Basic
+SendKeys "%{F11}"
+
+End Sub

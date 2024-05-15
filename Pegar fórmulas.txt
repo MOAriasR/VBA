@@ -1,0 +1,4 @@
+Range(Selection, Selection.End(xlDown)).Select
+Selection.PasteSpecial Paste:=xlPasteFormulas, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+    Application.CutCopyMode = False

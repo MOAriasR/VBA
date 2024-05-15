@@ -1,0 +1,26 @@
+Sub Filtrar()
+
+Dim Dia As Byte
+Dim Mes As Byte
+Dim Anyo As Integer
+
+Dia = Worksheets("Cal").Range("B5").Value
+Mes = Worksheets("Cal").Range("C5").Value
+Anyo = Worksheets("Cal").Range("D5").Value
+
+
+Sheets("BBDD").Select
+If ActiveSheet.FilterMode Then ActiveSheet.ShowAllData
+
+Dim uf As Integer
+uf = nReg(Hoja3, 1, 1)
+'
+With ActiveSheet.Range("$A$1:$K$" & uf)
+    On Error Resume Next
+    .AutoFilter Field:=2, Criteria1:=Dia
+    .AutoFilter Field:=3, Criteria1:=Mes
+    .AutoFilter Field:=4, Criteria1:=Anyo
+End With
+'
+
+End Sub

@@ -1,0 +1,6 @@
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+If CloseMode = 0 Then
+MsgBox "Para salir del formulario debes hacer clik en el boton SALIR", vbInformation, "SALIR"
+Cancel = 1
+End If
+End Sub

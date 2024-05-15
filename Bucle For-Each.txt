@@ -1,0 +1,11 @@
+'Ejepmo buscar celdas vacías en un rango
+
+dim rango as Range, celda as Range
+Set rango = Worksheets("AAAA").Range("BB:CC")
+'
+For Each celda in rango
+	If celda.Value = "" Then
+	   Msgbox "..."
+	   Exit sub
+	End If
+Next celda

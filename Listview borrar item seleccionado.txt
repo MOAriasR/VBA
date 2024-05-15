@@ -1,0 +1,16 @@
+Private Sub btnEliminar_Click()
+'x variable pública que se inicia al hacer click en un item del listview
+'
+    If x = 0 Then
+        MsgBox "Debes seleccionar un ítem.", vbInformation, Titulo
+        Exit Sub
+    End If
+    
+    Dim i As Integer
+    For i = Me.ListView1.ListItems.Count To 1 Step -1
+        If Me.ListView1.ListItems.Item(i) = x Then
+            ListView1.ListItems.Remove i
+        End If
+    Next
+'   
+End Sub

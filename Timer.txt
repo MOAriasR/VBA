@@ -1,0 +1,15 @@
+Sub MedirTiempo()
+
+Dim TiempoInicio as Double
+Dim Transcurrido as Double
+
+'La función Timer devuelve el número de segundos transcurridos desde la medianoche
+TiempoInicio = Timer
+
+'Aquí el código a ejecutar
+
+Transcurrido = Round(Timer - TiempoInicio, 2)	'2 son los decimales a redondear
+
+MsgBox Transcurrido
+
+End Sub

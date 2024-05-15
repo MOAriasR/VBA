@@ -1,0 +1,38 @@
+Sub CeldasVisibles()
+'Este ejemplo reordenará registros a partir de la primera celda vacía
+'teniendo en cuenta 2 criterios:
+'   1-Que la fila sea visible
+'   2-Que la celda visible no contenga el número 1
+'
+Application.ScreenUpdating = False
+'
+Dim secuencia As Integer
+'
+Sheets("Sec").Select
+ActiveSheet.Range("J4").Select
+Selection.End(xlDown).Select
+'
+secuencia = ActiveCell.Offset(0, 0).Value
+'
+ActiveCell.Offset(1, 0).Select
+ActiveCell.Offset(0, 0).Value = secuencia + 1
+secuencia = secuencia + 2
+ActiveCell.Offset(1, 0).Select
+'
+While ActiveCell.Offset(0, 0).Value <> 1
+        If ActiveCell.Offset(0, 0).EntireRow.Hidden = True Then
+            ActiveCell.Offset(1, 0).Select
+        Else
+            ActiveCell.Offset(0, 0).Value = secuencia
+            secuencia = ActiveCell.Offset(0, 0).Value + 1
+            ActiveCell.Offset(1, 0).Select
+'            
+                While ActiveCell.Offset(0, 0).EntireRow.Hidden = True
+                    ActiveCell.Offset(1, 0).Select
+                Wend
+        End If
+Wend
+'
+Application.ScreenUpdating = True
+
+End Sub

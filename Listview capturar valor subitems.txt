@@ -1,0 +1,8 @@
+Private Sub ListView1_ItemClick(ByVal Item As MSComctlLib.ListItem)
+'
+    Dim i As Integer
+    i = Item.Index
+'    
+    id = Me.ListView1.ListItems(i).SubItems(2)
+
+End Sub

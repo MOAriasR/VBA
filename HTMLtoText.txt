@@ -1,0 +1,7 @@
+'Set a reference to "Microsoft HTML object library".
+Function HtmlToText(sHTML) As String
+  Dim oDoc As HTMLDocument
+  Set oDoc = New HTMLDocument
+  oDoc.body.innerHTML = sHTML
+  HtmlToText = oDoc.body.innerText
+End Function

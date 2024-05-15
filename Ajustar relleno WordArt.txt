@@ -1,0 +1,16 @@
+Private Sub Worksheet_Change(ByVal Target As Range)
+
+If Target.Address = "$A$2" Then
+    If IsNumeric(Target.Value) Then	'en caso de que no se introduzca un valor num.
+        With Shapes("Rectángulo 1").TextFrame2.TextRange.Font.Fill
+            .TwoColorGradient msoGradientHorizontal, 1
+            .GradientAngle = 270
+            .GradientStops(1).Color = RGB(0, 0, 0)
+            .GradientStops(1).Position = Target.Value
+            .GradientStops(2).Color = RGB(255, 255, 255)
+            .GradientStops(2).Position = Target.Value
+        End With
+    End If
+End If
+
+End Sub

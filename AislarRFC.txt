@@ -1,0 +1,23 @@
+Sub AislarRfc()
+Dim celda As Range, texto As String, coincidencia As Object
+Dim item As Variant
+Dim rfc As New VBScript_RegExp_55.RegExp
+Dim mc As MatchCollection
+
+
+With rfc
+    .IgnoreCase = True
+    .Global = False
+    .Pattern = "[a-z]{3,4}[0-9]{6}[a-z0-9]{2}[0-9]{1}"
+End With
+
+For Each celda In Selection
+texto = celda.Value
+    Set mc = rfc.Execute(texto)
+        For Each item In mc
+            celda.Value = item
+'            Debug.Print item
+        Next item
+    
+Next celda
+End Sub

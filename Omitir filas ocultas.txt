@@ -1,0 +1,6 @@
+Sheets("Base_Datos").Select
+ActiveCell.Offset(1, 0).Select
+'
+While ActiveCell.Offset(0, 0).EntireRow.Hidden = True
+    ActiveCell.Offset(1, 0).Select
+Wend

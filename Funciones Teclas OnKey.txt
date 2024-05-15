@@ -1,0 +1,93 @@
+'***************************************************************************************
+'ASIGNA MACRO A UNA TECLA:
+________________________________________________________________________________________
+
+Sub activarSuprimir()
+'Asignamos a la tecla suprimir la llamada a la macro SUPR
+    Application.OnKey "{DEL}", "SUPR"
+
+End Sub
+_________________________________________________________________________________________
+
+Sub desactivarSuprimir()
+'Al no hacer llamada a un procedimiento se desactiva la macro asignada a la tecla
+	Application.OnKey "{DEL}"
+
+End Sub
+_________________________________________________________________________________________
+
+Sub SUPR()
+
+Dim pregunta As Integer
+
+If TypeName(Selection) = "Range" Then
+
+    pregunta = MsgBox("¿Deseas borrar el contenido?", vbYesNo + vbQuestion, "Borrar")
+    
+    If pregunta = vbYes Then
+        Selection.ClearContents
+    End If
+
+Else
+
+    Selection.Delete
+
+End If
+
+
+End Sub
+
+'***************************************************************************************
+'ASIGNA MACRO A UNA COMBINACIÓN DE TECLAS:
+Sub ShiftDerecha()
+
+    MsgBox "Has seleccionado las teclas Shift + Derecha", vbInformation, "Combinación de teclas"
+
+End Sub
+
+'__________________________________________________________________________________________
+Sub combinacionON()
+
+    Application.OnKey "+{RIGHT}", "ShiftDerecha"
+
+    'OTROS EJEMPLOS:
+'    Application.OnKey "^{RIGHT}", "ControlDerecha"
+'    Application.OnKey "%{RIGHT}", "AltDerecha"
+'    Application.OnKey "^+{RIGHT}", "ControlShiftDerecha"
+    
+End Sub
+'__________________________________________________________________________________________
+Sub combinacionOFF()
+
+    Application.OnKey "+{RIGHT}"
+    
+End Sub
+
+'***************************************************************************************
+'DESHABILITAR UNA COMBINACIÓN DE TECLAS. EN ESTE EJEMPLO SE DESHABILITA Ctrl + c:
+Sub NoCopiar()
+
+	MsgBox "No es posible copiar"
+
+End Sub
+'__________________________________________________________________________________________
+
+Sub copiarOFF()
+'c en minúscula
+
+    Application.OnKey "^{c}", "NoCopiar"
+
+'Si no queremos que aparezca el MsgBox, dejamos la llamada a procedimiento en "":
+'    Application.OnKey "^{c}", ""
+
+End Sub
+'__________________________________________________________________________________________
+
+Sub copiarON()
+'c en minúscula
+
+    Application.OnKey "^{c}"
+
+End Sub
+
+'***************************************************************************************

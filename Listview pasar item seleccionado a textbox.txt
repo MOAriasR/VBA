@@ -1,0 +1,15 @@
+Private Sub ListView1_ItemClick(ByVal item As MSComctlLib.ListItem)
+'
+X = ListView1.SelectedItem.Text '   ìtem seleccionado
+
+Sheets("BaseDatos").Select
+
+ActiveSheet.Range("A1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Find(What:=X, After:=ActiveCell, LookIn:=xlFormulas, LookAt _
+        :=xlWhole, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+        True, SearchFormat:=False).Activate
+        
+Me.textbox1.text=activecell.offset(0,0).value
+
+End Sub

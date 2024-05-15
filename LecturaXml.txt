@@ -1,0 +1,339 @@
+Sub Ruta_CFDI()
+'macro para en listar los XML que va a leer
+'Adapatado por Luis Reyes
+Dim fs, carpeta, archivo, subcarpeta As Object
+Dim contador As Long
+
+contador = 2 'determinar en que fila comenzará a colocar la ruta y nombre de los XML
+Set fs = CreateObject("Scripting.FileSystemObject")
+With Application.FileDialog(msoFileDialogFolderPicker) 'se obtiene la ruta la carpeta
+    If .Show = -1 Then
+        ruta = .SelectedItems(1)
+        Range("V1").Value = ruta & "\"
+    End If
+End With
+    
+    If ruta = "" Then
+        Exit Sub
+    End If
+
+Set carpeta = fs.GetFolder(ruta)
+
+For Each archivo In carpeta.Files
+
+ If Right(archivo, 4) = ".xml" Then
+
+  Range("AD" & contador).Value = ruta & "\" & archivo.Name
+
+  contador = contador + 1
+
+ End If
+
+ If Right(archivo, 4) = ".XML" Then
+
+  Range("AD" & contador).Value = ruta & "\" & archivo.Name
+
+  contador = contador + 1
+
+ End If
+
+Next
+
+If Application.WorksheetFunction.CountA(Columns(30)) <= 1 Then
+
+MsgBox "No se encontro ningún archivo *.XML" & Chr(10) & ruta, vbCritical, "Importar datos CFDI"
+
+End
+
+End If
+
+
+
+Call Lectura_CFDI 'ejecuta la macro que lee los XML
+
+End Sub
+
+
+
+
+
+Private Sub Lectura_CFDI()
+
+'Adapatado por Luis Reyes
+
+With Application
+
+      .ScreenUpdating = False
+
+      .Calculation = xlCalculationManual
+
+      .EnableEvents = False
+
+      .DisplayStatusBar = False
+
+      
+
+Dim Concepto As String
+
+Dim pctCompl As Single
+
+Set DocumentoXML = New DOMDocument
+
+Set r = Range("AD2").CurrentRegion 'determina apartir de donde comienza a contar
+
+filas = r.Rows.Count
+
+
+
+For i = 2 To filas + 1 'número de documentos que va a leer
+
+
+
+DocumentoXML.Load ("" & Cells(i, 30) & "")
+
+
+
+Set ListaNodo = DocumentoXML.SelectNodes("/cfdi:Comprobante")
+
+On Error Resume Next
+
+For Each Nodo In ListaNodo
+
+    Subtotal = Val(Nodo.Attributes.getNamedItem("SubTotal").Text)
+
+    Fecha = Mid(Nodo.Attributes.getNamedItem("Fecha").Text, 1, 10)
+
+    Serie = Nodo.Attributes.getNamedItem("Serie").Text
+
+    Folio = Serie & " - " & Nodo.Attributes.getNamedItem("Folio").Text
+
+    Total = Val(Nodo.Attributes.getNamedItem("Total").Text)
+
+ 
+
+
+    Descuento = Val(Nodo.Attributes.getNamedItem("Descuento").Text)
+
+  
+
+Next Nodo
+
+''''''''''''''''''''''''''''''''''''''''''''''''Nombre del emisor'''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Receptor")
+
+For Each Nodo In ListaNodo
+
+    Proveedor = Nodo.Attributes.getNamedItem("Nombre").Text
+
+    RFC = Nodo.Attributes.getNamedItem("Rfc").Text
+
+Next Nodo
+
+''''''''''''''''''''''''''''''''''''''''''''''''Conceptos'''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Conceptos/cfdi:Concepto")
+
+For Each Nodo In ListaNodo
+
+    Concepto = Concepto & Nodo.Attributes.getNamedItem("Descripcion").Text & " - "
+
+Next Nodo
+
+''''''''''''''''''''''''''''''''''''''''''''''''Impuestos'''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Conceptos/cfdi:Concepto/cfdi:Impuestos/cfdi:Traslados/cfdi:Traslado")
+
+For Each Nodo In ListaNodo
+
+    If Nodo.Attributes.getNamedItem("Impuesto").Text = "002" Then
+
+        IVA = IVA + Val(Nodo.Attributes.getNamedItem("Importe").NodeValue)
+
+    End If
+
+    If Nodo.Attributes.getNamedItem("Impuesto").Text = "003" Then
+
+        IEPS = IEPS + Val(Nodo.Attributes.getNamedItem("Importe").NodeValue)
+
+    End If
+
+ Next Nodo
+
+''''''''''''''''''''''''''''''''''''''''''''''''Retenciones'''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Conceptos/cfdi:Concepto/cfdi:Impuestos/cfdi:Retenciones/cfdi:Retencion")
+
+For Each Nodo In ListaNodo
+
+    If Nodo.Attributes.getNamedItem("Impuesto").Text = "001" Then
+
+        ISRRe = IVARe + Val(Nodo.Attributes.getNamedItem("Importe").NodeValue)
+
+    End If
+
+    If Nodo.Attributes.getNamedItem("Impuesto").Text = "002" Then
+
+        IVARe = IVARe + Val(Nodo.Attributes.getNamedItem("Importe").NodeValue)
+
+        End If
+
+Next Nodo
+
+'''''''''''''''''''''''''''OTROS IMPUESTOS''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("cfdi:Comprobante/cfdi:Complemento/implocal:ImpuestosLocales/implocal:TrasladosLocales")
+
+For Each Nodo In ListaNodo
+
+ISH = Nodo.Attributes.getNamedItem("Importe").Text
+
+Next Nodo
+
+'''''''''''''''''''''''''''AEROLINEAS''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("cfdi:Comprobante/cfdi:Complemento/aerolineas:Aerolineas")
+
+For Each Nodo In ListaNodo
+
+TUA = Nodo.Attributes.getNamedItem("TUA").Text
+
+Next Nodo
+
+
+
+Set ListaNodo = DocumentoXML.SelectNodes("cfdi:Comprobante/cfdi:Complemento/aerolineas:Aerolineas/aerolineas:OtrosCargos/aerolineas:Cargo")
+
+'MsgBox ListaNodo.Length
+
+For Each Nodo In ListaNodo
+
+YR = Nodo.Attributes.getNamedItem("Importe").Text
+
+Next Nodo
+
+
+
+''''''''''''''''''''''''''''''''''''UUID''''''''''''''''''''''''''''''''''''''''''''
+
+Set ListaNodo = DocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital")
+
+For Each Nodo In ListaNodo
+
+UUID = Nodo.Attributes.getNamedItem("UUID").Text
+
+Next Nodo
+
+
+
+Cells(i, 1) = Fecha
+
+Cells(i, 2) = Folio
+
+Cells(i, 3) = RFC
+
+Cells(i, 4) = Proveedor
+
+Cells(i, 5) = Concepto
+
+Cells(i, 5).ClearFormats
+
+Cells(i, 6) = Subtotal - TUA - YR - Descuento
+
+Cells(i, 7) = IVA
+
+Cells(i, 8) = ISRRe
+
+Cells(i, 9) = IVARe
+
+Cells(i, 10) = IEPS
+
+Cells(i, 11) = ISH
+
+Cells(i, 12) = TUA
+
+Cells(i, 13) = YR
+
+Cells(i, 14) = Total
+
+Cells(i, 15) = UUID
+
+
+
+Fecha = ""
+
+Folio = ""
+
+RFC = ""
+
+Proveedor = ""
+
+Concepto = ""
+
+Subtotal = 0
+
+Descuento = 0
+
+IVA = 0
+
+ISRRe = 0
+
+IVARe = 0
+
+IEPS = 0
+
+ISH = 0
+
+TUA = 0
+
+YR = 0
+
+Total = 0
+
+UUID = ""
+
+
+
+Next
+
+Cells(1, 1).Value = "Fecha"
+
+Cells(1, 2).Value = "Folio"
+
+Cells(1, 3).Value = "RFC"
+
+Cells(1, 4).Value = "Proveedor"
+
+Cells(1, 5).Value = "Concepto"
+
+Cells(1, 6).Value = "Subtotal"
+
+Cells(1, 7).Value = "IVA"
+
+Cells(1, 8).Value = "ISR RETENIDO"
+
+Cells(1, 9).Value = "IVA RETENIDO"
+
+Cells(1, 10).Value = "IEPS"
+
+Cells(1, 11).Value = "ISH"
+
+Cells(1, 12).Value = "TUA"
+
+Cells(1, 13).Value = "YR"
+
+Cells(1, 14).Value = "Total"
+
+Cells(1, 15).Value = "UUID"
+
+      .Calculation = xlCalculationAutomatic
+
+      .EnableEvents = True
+
+      .DisplayStatusBar = True
+
+    
+
+   End With
+
+End Sub

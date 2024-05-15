@@ -1,0 +1,69 @@
+Private Sub btnEditar_Click()
+
+    Dim i As Integer
+    Dim nFila As Integer
+    nFila = 10
+    
+    Hoja5.Select
+    
+    With Hoja5
+        For i = 1 To Me.ListView1.ListItems.Count
+            .Cells(nFila, 1) = Me.ListView1.ListItems(i).Text
+            .Cells(nFila, 2) = Me.ListView1.ListItems(i).ListSubItems(1).Text
+            .Cells(nFila, 3) = Me.ListView1.ListItems(i).ListSubItems(2).Text
+            .Cells(nFila, 6) = Me.ListView1.ListItems(i).ListSubItems(3).Text
+            .Cells(nFila, 7) = Me.ListView1.ListItems(i).ListSubItems(4).Text
+            .Cells(nFila, 8) = Me.ListView1.ListItems(i).ListSubItems(5).Text
+            .Cells(nFila, 9) = Me.ListView1.ListItems(i).ListSubItems(6).Text
+            nFila = nFila + 1
+            ActiveCell.EntireRow.Select
+            Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
+        Next i
+    End With
+
+End Sub  
+
+'***************************************************************
+'OTRA OPCIÓN:
+
+  'declaración e iniciación variable hoja
+    Dim objWs As Worksheet
+    Set objWs = Hoja17
+    
+    'borrar contenidos y formatos de la hoja
+    objWs.Cells.ClearContents
+    Cells.Select
+    Selection.Font.Bold = False
+    
+    'declaración variables
+    Dim k As Byte
+    Dim i As Integer
+    
+    'vuelvo las cabeceras del listview en la hoja y les doy formato
+    With Me.ListView1
+       For k = 1 To .ColumnHeaders.Count
+           objWs.Cells(1, k) = .ColumnHeaders.Item(k).Text
+           objWs.Cells(1, k).Font.Bold = True
+           objWs.Cells(1, k).Font.Size = 12
+           objWs.Cells(1, k).Interior.Color = vbYellow
+       Next
+    
+        'vuelco los datos del listview en la hoja
+       For i = 2 To .ListItems.Count + 1
+           objWs.Cells(i, 1) = .ListItems(i - 1).Text
+    
+           For j = 1 To .ListItems(i - 1).ListSubItems.Count
+               objWs.Cells(i, j + 1) = .ListItems(i - 1).SubItems(j)
+           Next
+       Next
+    End With
+
+    'convierto a número los datos procedentes del listview
+    Dim celda As Range
+    objWs.Select
+    ActiveSheet.Range("F2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    For Each celda In Selection
+        'Se evalua cada celda del rango y se hace la conversión
+        celda.Value = CDbl(celda)
+    Next celda

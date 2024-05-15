@@ -1,0 +1,68 @@
+'***************************************************************************************
+'MACRO QUE SE EJECUTARÁ DESPUÉS DE 5 SEGUNDOS:
+
+'variable de módulo
+Dim Tiempo
+________________________________________________________________________________________
+
+Sub valor()
+
+    Range("A2").Value = Range("A2").Value + 1
+
+End Sub
+_________________________________________________________________________________________
+
+Sub programarMacro1()
+
+    'Las dos líneas de código hacen lo mismo. Se puede escribir de las dos formas.
+    '1:
+    'Application.OnTime EarliestTime:=Now + TimeValue("00:00:01"), Procedure:="valor"
+    
+    '2:
+    Application.OnTime Now + TimeValue("00:00:05"), "valor"
+
+End Sub
+
+'***************************************************************************************
+
+'MACRO QUE SE EJECUTARÁ CADA 1 SEGUNDO:
+
+Sub programarMacro2()
+'Va sumando 1 cada segundo en la celda B2
+Range("b2").Value = Range("b2").Value + 1
+
+'Función DateAdd añade "s" = segundo
+Tiempo = DateAdd("s", 1, Time)
+
+'Función OnTime
+Application.OnTime Tiempo, "programarMacro2"
+
+'cancelar macro
+If Range("b2").Value = 10 Then Call cancelarMacro2
+
+End Sub
+_________________________________________________________________________________________
+
+Sub cancelarMacro2()
+'Cancela la macro "programarMacro2"
+Application.OnTime EarliestTime:=Tiempo, Procedure:="programarMacro2", Schedule:=False
+
+End Sub
+
+'***************************************************************************************
+'MACRO QUE SE EJECUTARÁ A UNA HORA DETERMINADA:
+
+Sub cerrarArchivo()
+
+    ThisWorkbook.Close True
+
+End Sub
+_________________________________________________________________________________________
+
+Sub programarHora()
+
+    Application.OnTime TimeValue("11:09:00"), "cerrarArchivo"
+
+End Sub
+
+'***************************************************************************************

@@ -1,0 +1,11 @@
+Sub abrirArchivo()
+'Procedimiento que abre el archivo seleccionado
+    With Application.FileDialog(msoFileDialogOpen)
+        .Filters.Clear
+        .Filters.Add "Excel y TXT", "*.xlsx, *.txt"
+        .FilterIndex = 2
+        .Show
+        .Execute   
+    End With
+'
+End Sub

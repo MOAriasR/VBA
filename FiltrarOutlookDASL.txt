@@ -1,0 +1,33 @@
+Sub UseDASLFilters()
+
+    Dim ol As Outlook.Application
+    Dim ns As Outlook.Namespace
+    Dim fol As Outlook.Folder
+    Dim i As Object
+    Dim mi As Outlook.MailItem
+    Dim filterString As String
+    Dim dmi As Outlook.MailItem
+    Dim UTCDate As Date
+    
+    Set ol = New Outlook.Application
+    Set ns = ol.GetNamespace("MAPI")
+    Set fol = ns.GetDefaultFolder(olFolderInbox)
+    
+    Set dmi = ol.CreateItem(olMailItem)
+    UTCDate = dmi.PropertyAccessor.LocalTimeToUTC("29 May 2019 12:00")
+    
+    filterString = "@SQL=""urn:schemas:httpmail:datereceived"" >= '" & Format(UTCDate, "dd mmm yyyy hh:mm") & "'"
+    
+    For Each i In fol.Items.Restrict(filterString)
+    
+        If i.Class = olMail Then
+        
+            Set mi = i
+            
+            Debug.Print mi.SenderName, mi.ReceivedTime, mi.Importance, mi.Size, mi.Subject
+        
+        End If
+    
+    Next i
+    
+End Sub

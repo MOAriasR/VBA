@@ -1,0 +1,10 @@
+Public Function nCol(Hoja As Worksheet, nFila As Long, nColumna As Integer)
+'
+'Función que permite identificar el número de columnas de una hoja determinada
+
+    Do Until IsEmpty(Hoja.Cells(nFila, nColumna))
+        nColumna = nColumna + 1
+    Loop
+    nCol = nColumna 'partiendo de una celda determinada, devuelve el número de la primera celda vacía que encuentra
+'
+End Function

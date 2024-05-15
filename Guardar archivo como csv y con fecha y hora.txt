@@ -1,0 +1,20 @@
+'Definir variables
+Dim year As String
+Dim month As String
+Dim day As String
+Dim hour As String
+Dim minutes As String
+'=========================================================
+'iniciar variables
+year = Worksheets("Roadnet").Range("year").Value
+month = Worksheets("Roadnet").Range("month").Value
+day = Worksheets("Roadnet").Range("day").Value
+hour = Worksheets("Roadnet").Range("hour").Value
+minutes = Worksheets("Roadnet").Range("minutes").Value
+'=========================================================
+'guardar como
+nbre = "Roadnet_" & year & month & day & "_" & hour & minutes
+ruta = ActiveWorkbook.Path
+n_arch = ActiveWorkbook.Name
+n_hoja = ActiveSheet.Name
+ActiveWorkbook.SaveAs Filename:=ruta & "\" & nbre & ".csv", FileFormat:=xlCSV

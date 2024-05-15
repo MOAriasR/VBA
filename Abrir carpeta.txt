@@ -1,0 +1,5 @@
+Sub IraCarpeta()
+Dim MiPath As String
+MiPath = ActiveWorkbook.Path
+Shell "explorer " & MiPath, vbNormalFocus
+End Sub

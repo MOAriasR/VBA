@@ -1,0 +1,23 @@
+Sub SiguienteItem()
+'
+Dim Cuenta As Integer
+Dim Numero As Integer
+Dim j As Integer
+Dim i As Integer
+'
+    Cuenta = Me.Listbox1.ListCount
+    '
+    'Validamos que haya un elemento seleccionado.
+    For j = 0 To Cuenta - 1
+        If Me.Listbox1.Selected(j) = True Then
+            Numero = Numero + 1
+        End If
+    Next j
+'   
+ 'selecciona la siguiente fila del listbox
+If Me.Listbox1.ListIndex < Me.Listbox1.ListCount - 1 Then
+    'muevo el index al siguiente elemento
+    Me.Listbox1.ListIndex = Me.Listbox1.ListIndex + 1
+End If
+'    
+End Sub

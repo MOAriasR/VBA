@@ -1,0 +1,35 @@
+Sub ExtraerCorreosDeOutlook()
+
+Dim OutlookApp As Object
+Dim ONameSpace As Object
+Dim MyFolder As Object
+Dim OItem As Object
+Dim Fila As Integer
+
+Set OutlookApp = CreateObject("Outlook.Application")
+Set ONameSpace = OutlookApp.GetNamespace("MAPI")
+Set MyFolder = ONameSpace.GetDefaultFolder(olFolderInbox)
+'Set MyFolder = ONameSpace.Folders("correo@gmail.com").Folders("Carpeta")
+
+Range(Range("A2"), ActiveCell.SpecialCells(xlLastCell)).ClearContents
+
+Fila = 2
+
+For Each OItem In MyFolder.Items
+
+    Sheets("Hoja1").Cells(Fila, 1).Value = OItem.SenderEmailAddress
+    Sheets("Hoja1").Cells(Fila, 2).Value = OItem.To
+    Sheets("Hoja1").Cells(Fila, 3).Value = OItem.Subject
+    Sheets("Hoja1").Cells(Fila, 4).Value = OItem.ReceivedTime
+    Sheets("Hoja1").Cells(Fila, 5).Value = OItem.Body
+
+    Fila = Fila + 1
+
+Next OItem
+
+Set OutlookApp = Nothing
+Set ONameSpace = Nothing
+Set MyFolder = Nothing
+
+End Sub
+Q

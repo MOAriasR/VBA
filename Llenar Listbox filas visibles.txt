@@ -1,0 +1,32 @@
+Application.ScreenUpdating = False
+On Error Resume Next
+'
+'llena listbox sólo con celdas visibles (con filtros palicados)
+Dim cell As Range
+Dim Rng As Range
+
+With Userform1
+   .ListBox1.ColumnCount = 10
+   .ListBox1.Clear
+End With
+
+With ThisWorkbook.Sheets("Base_Datos")
+    Set Rng = .Range("b6", .Range("b7").End(xlDown)).SpecialCells(xlCellTypeVisible)
+End With
+'
+
+For Each cell In Rng.Cells
+    With Userform1.ListBox1
+        .AddItem cell.Value
+        .list(.ListCount - 1, 1) = cell.Offset(0, 1).Value
+        .list(.ListCount - 1, 2) = cell.Offset(0, 2).Value
+        .list(.ListCount - 1, 3) = cell.Offset(0, 5).Value
+        .list(.ListCount - 1, 4) = cell.Offset(0, 7).Value
+        .list(.ListCount - 1, 5) = cell.Offset(0, 8).Value
+        .list(.ListCount - 1, 6) = cell.Offset(0, 20).Value
+        .list(.ListCount - 1, 7) = cell.Offset(0, 21).Value
+        .list(.ListCount - 1, 8) = cell.Offset(0, 23).Value
+        .list(.ListCount - 1, 9) = cell.Offset(0, 25).Value
+        .list(.ListCount - 1, 10) = cell.Offset(0, 29).Value
+    End With
+Next cell

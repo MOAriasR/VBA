@@ -1,0 +1,7 @@
+'Llena combos que tengan registros en la tabla
+userform1.combobox1.Clear
+fila = 2
+While Worksheets("Tabla").Cells(fila, "D").Value <> ""
+    userform1.combobox1.AddItem Worksheets("Tabla").Cells(fila, "D").Value
+    fila = fila + 1
+Wend

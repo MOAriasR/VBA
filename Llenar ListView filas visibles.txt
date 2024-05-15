@@ -1,0 +1,54 @@
+Sub LlenarLV1()
+'
+'  configuración ListView1
+    With Form_Consulta.ListView1
+        .Gridlines = True
+        .View = lvwReport
+        .FullRowSelect = True
+    	.Height = 74
+    	.Top = 56
+    	.Left = 12
+    	.ListItems.Clear
+        .ColumnHeaders.Clear
+        .ColumnHeaders.Add Text:="ID", Width:=0
+'       .ColumnHeaders.Add(, , "ID", Width:=0).Tag = "NUMBER"
+        .ColumnHeaders.Add Text:="Nombre", Width:=80
+        .ColumnHeaders.Add Text:="Apellidos", Width:=120, Alignment:=2
+        .ColumnHeaders.Add Text:="Categoría", Width:=60
+        .ColumnHeaders.Add Text:="Calle", Width:=102, Alignment:=2
+        .ColumnHeaders.Add Text:="CP", Width:=35, Alignment:=2
+        .ColumnHeaders.Add Text:="Ciudad", Width:=85, Alignment:=2
+        .ColumnHeaders.Add Text:="Móvil", Width:=60, Alignment:=2
+         .ColumnHeaders.Add Text:="e-mail", Width:=140, Alignment:=2
+    End With
+'
+Form_Consulta.ListView1.ListItems.Clear 'limpia el listview
+'  
+'Añade los datos a ListView1
+Sheets("BaseDatos").Select
+ActiveSheet.Range("A2").Select
+'
+Dim fila As Long
+Dim li As Variant
+'
+fila = 2
+    Do Until Worksheets("BaseDatos").Cells(fila, "A") = ""
+        If Cells(fila, 1).Rows.Hidden = False Then
+            Set li = Form_Consulta.ListView1.ListItems.Add(Text:=Sheets("BaseDatos").Cells(fila, "A").Text) 'ID
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "B").Text) 'nombre
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "C").Text) 'apellidos
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "D").Text) 'categoría
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "E").Text) 'calle
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "F").Text) 'cp
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "G").Text) 'localidad
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "I").Text) 'móvil
+            li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "L").Text) 'mail
+        End If
+'        
+        fila = fila + 1
+'        
+    Loop
+'
+        Form_Consulta.txt_registros = Form_Consulta.ListView1.ListItems.Count
+'      
+End Sub

@@ -1,0 +1,14 @@
+Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+On Error Resume Next
+ '
+With ListView1
+    .SortKey = ColumnHeader.Index - 1
+    If .SortOrder = lvwAscending Then
+        .SortOrder = lvwDescending
+    Else
+        .SortOrder = lvwAscending
+    End If
+    .Sorted = True
+End With
+'
+End Sub

@@ -1,0 +1,1 @@
+imgImageControl.Picture = Application.Commandbars.GetImageMso("id", 16, 16)

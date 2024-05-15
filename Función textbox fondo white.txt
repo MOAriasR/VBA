@@ -1,0 +1,11 @@
+Public Function txtWhite(xtag As String, xForm As UserForm)
+'
+    Dim xCtrl As Control
+    'asigna color de fondo blanco a todos los controles con el tag asignado
+    For Each xCtrl In xForm.Controls
+        If xCtrl.Tag = xtag Then
+            xCtrl.BackColor = vbWhite
+        End If
+    Next
+'
+End Function

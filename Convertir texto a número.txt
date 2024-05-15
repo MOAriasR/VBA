@@ -1,0 +1,12 @@
+Sub ConvertNum()
+Application.ScreenUpdating = False
+Sheets("Ventas").Select
+Dim celda As Range
+    ActiveSheet.Range("B6").Select
+    Range(Selection, Selection.End(xlDown)).Select
+        For Each celda In Selection
+            celda.Value = Val(celda.Value)
+        Next celda
+Application.ScreenUpdating = True
+
+End Sub

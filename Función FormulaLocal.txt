@@ -1,0 +1,10 @@
+
+Sub ForLocal()
+
+    'Escribe en la celda A2 la fórmula en el lenguaje del ordenador
+    Range("A2").FormulaLocal = "=SUMA(A5:A10)"
+    
+    'Escribe en la celda A2 la fórmula en inglés y funcionará con todos los lenguajes del ordenador
+    Range("B2").Formula = "=SUM(B5:B10)"
+
+End Sub

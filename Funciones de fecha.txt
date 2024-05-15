@@ -1,0 +1,26 @@
+Sub FuncionesTiempo()
+
+Dim fecha As Date
+Dim hora As Date
+
+fecha = #12/30/2019#
+hora = #9:00:00 AM#
+
+
+Range("B2").Value = DateSerial(2019, 9, 30)                                 'Una fecha en concreto
+Range("B3").Value = Date                                                    'La fecha actual
+Range("B4").Value = Now                                                     'La fecha y hora actual
+Range("B5").Value = Time                                                    'La hora actual
+Range("B6").Value = Day(fecha)                                              'el día de una fecha dada
+Range("B7").Value = Month(fecha)                                            'el mes de una fecha dada
+Range("B8").Value = MonthName(Month(Date), False)                           'nombre de mes actual
+Range("B9").Value = MonthName(9, False)                                     'nombre de mes sobre un mes dado
+Range("B10").Value = Year(fecha)                                            'el año de una fecha dada
+Range("B11").Value = IsDate(fecha)                                          'evalúa si es fecha (boolean)
+Range("B12").Value = Hour(Now)                                              'hora actual
+Range("B13").Value = Minute(Now)                                            'minuto actual
+Range("B14").Value = Second(Now)                                            'segundo actual
+Range("B15").Value = Weekday(Date, vbMonday)                                'día de la semana (1=monday)NUM
+Range("B16").Value = WeekdayName(3, False, vbMonday)                        'día de la semana (1=monday)TEXT
+
+End Sub

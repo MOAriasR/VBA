@@ -1,0 +1,37 @@
+Sub Report()
+'
+On Error Resume Next
+Sheets("Pivot").Select
+'
+    ActiveWorkbook.SlicerCaches("Slicer_Ruta1").ClearManualFilter
+    ActiveWorkbook.SlicerCaches("Slicer_Canal1").ClearManualFilter
+    ActiveWorkbook.SlicerCaches("Slicer_ABC").ClearManualFilter
+    ActiveWorkbook.SlicerCaches("Slicer_Día1").ClearManualFilter
+    ActiveWorkbook.SlicerCaches("Slicer_Ciudad1").ClearManualFilter
+'
+    With ActiveSheet.PivotTables("PivotTable5").PivotFields("Canal1")
+        .ClearAllFilters
+        .PivotItems("BAR").Visible = True
+        .PivotItems("NOBAR").Visible = True
+        .PivotItems("(blank)").Visible = False
+    End With
+'
+    Dim i As Integer
+    Dim Ruta10 As String
+    Dim Ruta89 As String
+'       
+    Ruta10 = UCase(Sheets("Pivot").Range("A3").Value)
+'    
+    With ActiveWorkbook.SlicerCaches("Slicer_Ruta1")
+        .ClearManualFilter    
+        For i = 1 To .SlicerItems.Count
+             If UCase(.SlicerItems(i).Value) > 9999 Then
+                  .SlicerItems(i).Selected = False
+             Else
+                  .SlicerItems(i).Selected = True
+             End If
+        Next
+'
+    End With
+
+End Sub

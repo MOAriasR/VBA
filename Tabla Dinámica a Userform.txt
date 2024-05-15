@@ -1,0 +1,51 @@
+Sub Zona_Prod_Yag()
+
+On Error Resume Next
+Application.ScreenUpdating = False
+
+    Sheets("Productos").Select
+    ActiveSheet.Range("AB7").Select
+    
+    Dim MiObjeto As ChartObject, MiGrafico As Chart, MiImagen As Object
+    Dim Guardado As Boolean
+    Dim rango1 As Range
+    Dim nombre As String
+    
+    Dim uf As Integer
+    uf = nReg(Hoja2, 8, 28) - 1
+    
+    Set rango1 = Sheets("Productos").Range("AB7:AG" & uf)
+    rango1.CopyPicture Appearance:=xlScreen, Format:=xlPicture
+    
+    Set MiObjeto = ActiveSheet.ChartObjects.Add(0, 0, 140, 100)	'(Izquierda, arriba, ancho, alto)
+    Set MiGrafico = MiObjeto.Chart
+    
+    MiObjeto.Activate
+    MiGrafico.ChartArea.Select
+    MiGrafico.Paste
+    Set MiImagen = MiGrafico.Pictures(1)
+    
+    MiImagen.Left = 0
+    MiImagen.Top = 0
+    
+    MiObjeto.Border.LineStyle = xlNone
+    MiObjeto.Width = MiImagen.Width + 5
+    MiObjeto.Height = MiImagen.Height + 5
+    
+    Guardado = MiGrafico.Export( _
+    filename:=ThisWorkbook.path & "\Variacion4.GIF", filtername:="GIF")
+    If Not Guardado Then MsgBox prompt:="Problemas al guardar la imagen.", Buttons:=vbOKOnly + vbExclamation
+    MiObjeto.Delete
+    
+    Form_Prod.Image7.Picture = LoadPicture(ThisWorkbook.path & "\Variacion4.GIF")
+    
+    Set MiObjeto = Nothing
+    Set MiGrafico = Nothing
+    Set MiImagen = Nothing
+    Set rango1 = Nothing
+    
+    Kill (ThisWorkbook.path & "\Variacion4.GIF")
+
+Application.ScreenUpdating = True
+
+End Sub

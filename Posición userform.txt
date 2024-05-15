@@ -1,0 +1,4 @@
+   
+Me.StartUpPosition = 0 'Manual
+Me.Top = 0   'Desde la parte superior
+Me.Left = 0  'Desde el margen izquierdo

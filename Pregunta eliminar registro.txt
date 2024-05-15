@@ -1,0 +1,28 @@
+Private Sub cmdEliminar_Click()
+Application.ScreenUpdating = False
+'
+Dim Pregunta As String
+'X es una variable pública (corresponde al item seleccionado en un listbox
+'
+Sheets("BaseDatos").Select
+ActiveSheet.Range("A1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Find(What:=X, After:=ActiveCell, LookIn:=xlFormulas, LookAt _
+        :=xlWhole, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+        False, SearchFormat:=False).Activate
+'     
+Pregunta = MsgBox("¿Estás seguro de eliminar el registro?", vbYesNo + vbQuestion, "Eliminar registros")
+If Pregunta <> vbNo Then
+    ActiveCell.EntireRow.Delete
+    Call killFile 'elimina la foto del contacto de la carpeta
+    MsgBox "El registro ha sido eliminado correctamente.", vbInformation, "Registro eliminado"
+    Call LlenarLV1
+    Me.Repaint
+Else
+    MsgBox "Operación cancelada por el usuario", vbInformation, "Cancelada"
+    Exit Sub
+End If
+'
+Application.ScreenUpdating = True
+'
+End Sub

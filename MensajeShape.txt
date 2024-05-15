@@ -1,0 +1,18 @@
+Sub MuestraMensajeRegistro(mens As String)
+Dim i As Integer
+Dim retardo, inicio As Double
+
+With REGISTROS.Shapes("aviso")
+    .Visible = msoCTrue
+    .TextFrame2.TextRange.Characters.Text = mens
+        For i = 1 To 120
+            .Fill.Transparency = i / 120
+            retardo = 0.012
+            inicio = Timer
+            Do
+            DoEvents
+            Loop While Timer - inicio < retardo
+        Next i
+    .Visible = msoFalse
+    .TextFrame2.TextRange.Characters.Text = ""
+End With

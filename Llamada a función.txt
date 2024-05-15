@@ -1,0 +1,7 @@
+Private Sub CommandButton2_Click()
+limpiarTXT "boxes", Me 'function limpia los textboxes
+'
+'boxes es el nombre dado al tag
+'limpiarTXT es el nombre de la función
+'
+End Sub

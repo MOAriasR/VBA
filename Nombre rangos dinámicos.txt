@@ -1,0 +1,25 @@
+
+ Dim origen As String
+       
+    'construimos el rango: hoja, fila y columna
+    origen = "TD!R" & fila & "C" & columnaDesde & ""
+    
+        With ActiveWorkbook.Names("rgProvinciaTot1")
+            .Name = "rgProvinciaTot1"
+            .RefersToR1C1 = "=OFFSET(" & origen & ",0,0,1," & ancho & ")"
+        End With
+
+
+ 'pasamos el nombre del rango a las variables
+    Dim nombreRango1 As String
+    nombreRango1 = "TD!rgProvinciaTot1"
+
+ 'seleccionamos el gráfico
+    Sheets("TD").ChartObjects("GrProvinciaTot").Activate
+    
+    'cambiamos el rango del gráfico
+    ActiveChart.FullSeriesCollection(1).XValues = nombreRango1      'Eje horizontal
+    ActiveChart.FullSeriesCollection(1).Values = nombreRango2        '1 Eje vertical
+    ActiveChart.FullSeriesCollection(2).Values = nombreRango3        '2 Eje vertical
+    ActiveChart.FullSeriesCollection(3).Values = nombreRango4        '1 Eje vertical
+    ActiveChart.FullSeriesCollection(4).Values = nombreRango5        '1 Eje vertical

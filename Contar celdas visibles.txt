@@ -1,0 +1,8 @@
+dim ruta as variant
+ruta = 100
+
+Sheets("BASEDATOS").Select
+If ActiveSheet.FilterMode Then ActiveSheet.ShowAllData
+ActiveSheet.Range("$A$5:$AH$30000").Autofilter Field:=3, Criteria1:=ruta
+ActiveSheet.Range("C6").Select
+Range("c6", Cells(Rows.Count, "C").End(xlUp)).SpecialCells(xlCellTypeVisible).Cells(1, 1).Select

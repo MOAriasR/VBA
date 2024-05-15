@@ -1,0 +1,21 @@
+Dim Lista As Integer
+Dim j As Integer
+Dim i As Integer
+Dim Cancion As String
+
+    Lista = Me.ListBox1.ListCount
+    '
+    'Validamos que haya un elemento seleccionado.
+    For j = 0 To Lista - 1
+        If Me.ListBox1.Selected(j) = True Then
+        End If
+    Next j
+    '
+    'La canción seleccionada se pasará a la variable
+    For i = 0 To Lista - 1
+        If Me.ListBox1.Selected(i) = True Then
+            Cancion = Me.ListBox1.List(i)
+        End If
+    Next i
+
+MsgBox Cancion

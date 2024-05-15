@@ -1,0 +1,16 @@
+Sub Abrir_Mapa()
+On Error GoTo ErrorMapa
+Sheets("SetUp").Select
+With Worksheets("SetUp")
+    .Range("MiPath").Value = ThisWorkbook.Path
+    .Range("Abre_Link").Select
+End With
+ActiveCell.FormulaR1C1 = "=HYPERLINK(R[-2]C&R[-1]C)"
+'
+ActiveWorkbook.FollowHyperlink Range("Abre_Link")
+'
+Exit Sub
+ErrorMapa:
+MsgBox "La ruta seleccionada no tiene todavía ningún mapa cargado", vbCritical, "Mapa"
+'
+End Sub

@@ -1,0 +1,24 @@
+Option Explicit
+Public Function limpiarControles(xtag As String, xForm As UserForm)
+'
+    Dim xCtrl As Control
+    'pone todos los controles con el tag asignado en "false"
+    For Each xCtrl In xForm.Controls
+        If xCtrl.Tag = xtag Then
+            xCtrl = False
+        End If
+    Next
+ '   
+End Function
+'==============================================================
+Public Function limpiarTXT(xtag As String, xForm As UserForm)
+'
+    Dim xCtrl As Control
+    'pone todos los controles con el tag asignado en ""
+    For Each xCtrl In xForm.Controls
+        If xCtrl.Tag = xtag Then
+            xCtrl = Empty
+        End If
+    Next
+ '   
+End Function

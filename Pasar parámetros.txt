@@ -1,0 +1,26 @@
+'Ejemplo de pasar parámetros por Referencia
+Sub Suma(rsuma As Integer, num1 As Integer, num2 As Integer)
+    rsuma = num1 + num2
+End Sub
+
+Sub Llamando_a_suma()
+    Dim rsuma As Integer, num1 As Integer, num2 As Integer
+'    
+    rsuma = 0
+    num1 = 10
+    num2 = 20
+'  
+    Call Suma(rsuma, num1, num2)
+    MsgBox rsuma 'será igual a 30
+'   
+End Sub
+'**********************************************************************
+'Otro ejemplo
+Sub Suma(num1 as integer, num2 as integer)
+    MsgBox num1 + num2  'el resultado del procedimiento será 12
+End sub
+'
+Sub Llamando_a_suma()
+    Call Suma(7, 5) 'Pasa el nº7 y 5 por parámetros a la Sub Suma
+End sub
+

@@ -1,0 +1,11 @@
+Function QuitarAcentos(texto As String) As String
+Dim acentos, sinacentos As Variant
+Dim i As Byte
+
+acentos = Array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "Ñ")
+sinacentos = Array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "N")
+For i = 0 To UBound(acentos)
+    texto = Replace(texto, acentos(i), sinacentos(i))
+Next i
+QuitarAcentos = texto
+End Function

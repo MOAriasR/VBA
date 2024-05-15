@@ -1,0 +1,16 @@
+'Método For each
+Sheets("BBDD").Select
+'
+Dim i As Integer
+Dim uf As Integer
+Dim celda As Range
+ '  
+'Listbox con una columna
+uf = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row - 1
+ActiveSheet.Range("A3" & ":A" & uf).Select
+With Form_Report.ListBox1
+    .Clear
+    For Each celda In Selection
+        .AddItem celda.Value
+    Next
+End With

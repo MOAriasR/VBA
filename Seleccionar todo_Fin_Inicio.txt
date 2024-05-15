@@ -1,0 +1,4 @@
+Range("A5").Select
+Range(Selection, ActiveCell.SpecialCells(xlLastCell)).Select
+Selection.ClearContents
+Range("A4").Select

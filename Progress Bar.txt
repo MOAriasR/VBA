@@ -1,0 +1,60 @@
+Private Sub UserForm_Activate()
+
+    With Me
+        .ProgressBar1.Max = 5
+        .ProgressBar1.Min = 1
+    End With
+    
+    Dim i As Integer
+    i = 1
+       
+    Me.ProgressBar1 = i
+    Me.Label1.Caption = "Procesando...10%"
+    Application.EnableEvents = True
+    DoEvents
+    
+    For i = 1 To 1
+        Me.ProgressBar1 = i
+        '***CÓDIGO***
+        Application.Wait (Now + TimeValue("0:00:02"))
+        Me.ProgressBar1 = i + 1
+        Me.Label1.Caption = "Procesando...25%"
+        Application.EnableEvents = True
+        DoEvents
+    Next i
+    
+    For i = 2 To 2
+        Me.ProgressBar1 = i
+        '***CÓDIGO***
+        Application.Wait (Now + TimeValue("0:00:02"))
+        Me.ProgressBar1 = i + 1
+        Me.Label1.Caption = "Procesando...50%"
+        Application.EnableEvents = True
+        DoEvents
+    Next i
+    
+    For i = 3 To 3
+        Me.ProgressBar1 = i
+        '***CÓDIGO***
+        Application.Wait (Now + TimeValue("0:00:02"))
+        Me.ProgressBar1 = i + 1
+        Me.Label1.Caption = "Procesando...75%"
+        Application.EnableEvents = True
+        DoEvents
+    Next i
+       
+    For i = 4 To 4
+        Me.ProgressBar1 = i
+        '***CÓDIGO***
+        Application.Wait (Now + TimeValue("0:00:02"))
+        Me.ProgressBar1 = 5
+        Application.EnableEvents = True
+        DoEvents
+    Next i
+    
+    Me.Label1.Caption = "Procesando...100%"
+    Unload Me
+ 
+    MsgBox "Proceso realizado correctamente", vbInformation, "Progreso"
+
+End Sub

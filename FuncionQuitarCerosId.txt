@@ -1,0 +1,4 @@
+Function QuitarCerosId(id As String)
+id = Val(id)
+QuitarCerosId = CStr(id)
+End Function

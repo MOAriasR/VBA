@@ -1,0 +1,25 @@
+Sub CountDown()
+Application.OnTime Now + TimeValue("00:00:01"), "Contar"
+End Sub
+'==============================================================
+Sub Contar()
+'
+Dim D As Date
+D = Userform1.TextBox20.Value
+Tempo = D - TimeValue("00:00:01")
+Userform1.TextBox20 = Format(Tempo, "hh:mm:ss")
+DoEvents
+'
+If Tempo <= 0 Then
+    MsgBox "Tiempo agotado", vbInformation, "TIEMPO"
+    ***código***
+    Exit Sub
+End If
+'
+Call CountDown
+End Sub
+'==============================================================
+Sub Parar_Contar()
+On Error Resume Next
+Application.OnTime Now + TimeValue("00:00:01"), "Contar", , False
+End Sub

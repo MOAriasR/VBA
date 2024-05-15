@@ -1,0 +1,9 @@
+'Range("A2").Select
+'Range(Selection, Selection.End(xlToRight)).Select
+'Range(Selection, Selection.End(xlDown)).Select
+'===================================================
+'ActiveCell.Offset(0, 0).End(xlDown).Select
+'===================================================
+'ir a última fila
+ActiveSheet.Range("F4").Select
+Selection.End(xlDown).Select

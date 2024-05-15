@@ -1,0 +1,21 @@
+<dialogBoxLauncher>
+					<button id="boton1" onAction="Macros" screentip="Forma de Generador de Póliza"/>
+					</dialogBoxLauncher>
+
+<contextMenus>
+		<contextMenu idMso="ContextMenuCell">
+
+		<menu id="MySubMenu" label="DFT - Macros CXC" insertBeforeMso="Cut"  >
+
+
+		<button id="btn3" label="Asignar Póliza" screentip="Asignar póliza a cada factura cobrada" image="invoice" onAction="Macros"/>
+
+
+
+				 
+		</menu>
+
+		<menuSeparator id="MySeparator" insertBeforeMso="Cut" />
+
+		</contextMenu>
+	</contextMenus>

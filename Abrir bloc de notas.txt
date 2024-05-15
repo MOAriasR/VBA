@@ -1,0 +1,3 @@
+Private Sub Image12_Click()
+Shell "NotePad", vbNormalFocus
+End Sub

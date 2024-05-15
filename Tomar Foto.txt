@@ -1,0 +1,39 @@
+Private Sub CommandButton1_Click()
+Dim Disparar As Variant
+
+'Asegurar que el diretorio seleccionado es el del archivo actual
+ChDir (ActiveWorkbook.Path)
+     
+    'capture una imagen nueva
+    '"vbHide" para ocultar la ventana de la consola. Cambiar por vbNormalFocus si queremos verla
+    'Poner la ruta exacta de donde esté el ejecutable CommandCam
+    Disparar= Shell("C:\Users\Juan\Documents\Excel\CommandCam.exe", vbHide)
+    ' Esperar a que la foto se haya capturado
+    While Dir("image.bmp") = ""
+    Wend
+    
+    ' Esperar a que la foto se haya guardado
+    Application.Wait (Now + TimeValue("00:00:01"))
+    
+    'Cargar la imagen en el control de imagen si fuera el caso
+    'Image1.Picture = LoadPicture("image.bmp")
+    
+    'O Llamada a procedimiento para insertar la foto capturada en la hoja activa
+    'pasando por parámetro el nombre del archivo
+    Call InsertarImg("image.bmp")
+    
+End Sub
+'________________________________________________________________________________
+
+Sub InsertarImg(ByVal archivo As String)
+
+    Dim ruta As String
+    ruta = ActiveWorkbook.Path & "\" & archivo
+
+    ActiveSheet.Range("A1").Select
+    ActiveSheet.Pictures.Insert(ruta).Select
+    
+    'borrar archivo
+    Kill ruta
+    
+End Sub

@@ -1,0 +1,46 @@
+
+Me.ProgressBar1.Min = 0
+Me.ProgressBar1.Max = 1
+
+'variables
+Dim cuenta As Integer
+cuenta = 4	'asignar número según secciones de código (ej. 4 secciones de código)
+Dim valor As Integer
+Dim progreso As Single
+'************************************************************
+
+	'código***********
+	'código***********
+
+'progressBar
+valor = valor + 1
+progreso = valor / cuenta
+Me.Label1.Caption = Round(progreso * 100, 0) & "% completado"
+DoEvents
+
+	'código***********
+	'código***********
+
+'progressBar
+valor = valor + 1
+progreso = valor / cuenta
+Me.Label1.Caption = Round(progreso * 100, 0) & "% completado"
+DoEvents
+
+	'código***********
+	'código***********
+
+'progressBar
+valor = valor + 1
+progreso = valor / cuenta
+Me.Label1.Caption = Round(progreso * 100, 0) & "% completado"
+DoEvents
+
+	'código***********
+	'código***********
+
+'progressBar
+valor = valor + 1
+progreso = valor / cuenta
+Me.Label1.Caption = Round(progreso * 100, 0) & "% completado"
+DoEvents

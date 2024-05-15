@@ -1,0 +1,14 @@
+Private Sub Label6_Click()
+'
+    Dim address As String
+    On Error GoTo etiqueta
+    address = "https://diccionario.reverso.net/espanol-definiciones/"
+'    
+    ActiveWorkbook.FollowHyperlink address:=address, NewWindow:=True    
+    Exit Sub
+'
+etiqueta:
+MsgBox "La página ya no existe o ha fallado la conexión a internet", vbInformation, "Web no disponible"
+Exit Sub
+
+End Sub

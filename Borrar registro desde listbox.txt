@@ -1,0 +1,39 @@
+Private Sub cmd_eliminar_Click()
+Application.ScreenUpdating = False
+'
+'antes se debe enviar el item seleccionado en el listbox a una variable pública
+'variable pública = Palabra
+'
+If Palabra = "" Then
+    MsgBox "Debes seleccionar una palabra", vbExclamation, "Seleccionar palabra"
+    Exit Sub
+End If
+'
+Sheets("BaseDatos").Select
+ActiveSheet.Range("A2").Select
+Range(Selection, Selection.End(xlDown)).Select
+'
+Cells.Find(What:=Palabra, After:=ActiveCell, LookIn:=xlValues, _
+LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext, _
+MatchCase:=False, SearchFormat:=False).Activate
+'
+Dim Pregunta as string
+Pregunta = MsgBox("Se va a borrar la palabra '" & Palabra & "' de la base de datos. ¿Estás seguro?", vbYesNo + vbQuestion, "Borrar")
+            If Pregunta <> vbNo Then
+                ActiveCell.Offset(0, 0).Select
+                Range(Selection, Selection.End(xlToRight)).Select
+                Selection.Delete Shift:=xlUp
+                MsgBox "La palabra " & Palabra & " ha sido eliminada", vbInformation, "Palabra eliminada"
+                Call ListBorrar 'llenar listbox
+                Me.txt_Nombre.Text = "Introduce palabra"
+                Palabra = ""
+            Else
+                MsgBox "Operación cancelada", vbInformation, "Cancelado"
+                Call ListBorrar 'llenar listbox
+                Me.txt_Nombre.Text = "Introduce palabra"
+                Palabra = ""
+                Exit Sub
+            End If
+
+Application.ScreenUpdating = True
+End Sub

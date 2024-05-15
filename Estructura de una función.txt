@@ -1,0 +1,22 @@
+'Estructura Function
+'
+Function c_porcentaje(num As Integer, porcentaje As Integer) As Double
+'c_porcentaje es el nombre de la función
+'Entre paréntesis los parámetros que va a recibir)
+'as double es el formato del valor que devolverá
+'
+Dim resultado As Double
+resultado = (num * porcentaje) / 100
+'
+c_porcentaje = resultado 'la función c_porcentaje devolverá el resultado de la ecuación.
+'
+End Function
+'
+'*********************************************************************************
+Sub llamadaFunction()
+'
+Call c_porcentaje(10, 50) 'llamada a la función
+'or
+MsgBox c_porcentaje(10, 50)  'o llamada a la función mostrando el resultado en un MsgBox
+'
+End Sub

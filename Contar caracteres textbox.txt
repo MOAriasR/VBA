@@ -1,0 +1,9 @@
+Private Sub TextBox1_Change()
+'cuenta los caracteres del textbox1
+For X = 1 To Len(Me.TextBox1.Text)
+    contador = X
+Next X
+'
+Me.TextBox3.Text = X - 1
+
+End Sub

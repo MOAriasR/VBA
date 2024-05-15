@@ -1,0 +1,24 @@
+Sub Respaldo()
+Dim anio, mes, dia, fecha, tiempo, horas, minutos, ampm As String
+anio = Right(CStr(Year(Date)), 2)
+If Month(Date) > 9 Then
+    mes = CStr(Month(Date))
+Else
+    mes = "0" & CStr(Month(Date))
+End If
+
+If Day(Date) > 9 Then
+    dia = CStr(Day(Date))
+Else
+    dia = "0" & CStr(Day(Date))
+End If
+
+fecha = anio & mes & dia & "_"
+tiempo = CStr(Time)
+horas = Left(tiempo, 2)
+minutos = Mid(tiempo, 4, 2)
+ampm = Mid(tiempo, 10, 1) & "m"
+fecha = "Respaldo del " & fecha & horas & minutos & ampm & ".xlsx"
+
+Workbooks("PENDIENTESCLIENTES.XLSX").SaveCopyAs Filename:="C:\Clientes\Arivel\" & fecha
+End Sub

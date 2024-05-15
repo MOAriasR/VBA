@@ -1,0 +1,8 @@
+Private Sub MonthView2_DateClick(ByVal DateClicked As Date)
+Worksheets("BASE_DATOS").Range("Desde").Value = MonthView2
+Unload Form_Desde
+End Sub
+'=================================================================
+Private Sub UserForm_Activate()
+MonthView2 = Now - 90
+End Sub

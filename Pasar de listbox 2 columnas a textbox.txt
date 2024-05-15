@@ -1,0 +1,33 @@
+Private Sub ListBox1_Click()
+
+    Dim Lista As Integer
+    Dim j As Integer
+    Dim i As Integer
+    Dim nombre As String
+    Dim apellido As String
+    Lista = Me.ListBox1.ListCount
+    
+    'Validamos que haya un elemento seleccionado.
+    For j = 0 To Lista - 1
+        If Me.ListBox1.Selected(j) = True Then
+            'nada
+        End If
+    Next j
+    
+    'el nombre seleccionado se pasará a la variable
+    For i = 0 To Lista - 1
+        If Me.ListBox1.Selected(i) = True Then
+            nombre = Me.ListBox1.List(i)
+            apellido = Me.ListBox1.List(i, 1)
+        End If
+    Next i
+    
+    Me.txtNombre.Text = nombre
+    Me.txtApellidos.Text = apellido
+
+    Sheets("Celdas").Select
+    ActiveSheet.Range("G1").Value = nombre
+    ActiveSheet.Range("H1").Value = apellido
+
+
+End Sub

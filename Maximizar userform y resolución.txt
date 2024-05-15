@@ -1,0 +1,11 @@
+'Initialize
+Application.ActiveWindow.WindowState = xlMaximized
+Me.Height = Application.Height
+Me.Width = Application.Width
+'============================================================================
+Dim ApplicationWidth As Integer
+Dim ApplicationHeight As Integer
+'============================================================================
+ApplicationWidth = Application.Width
+ApplicationHeight = Application.Height
+Form_Panel_control.lblResolution.Caption = (" " & (CStr(ApplicationWidth) & " x " & CStr(ApplicationHeight)))

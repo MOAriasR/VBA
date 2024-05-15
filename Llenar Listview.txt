@@ -1,0 +1,57 @@
+Sub LlenarLView()
+'
+'configuración listview
+With Userform1.ListView1
+    .Gridlines = False
+    .View = lvwReport
+    .FullRowSelect = True
+    .Height = 74
+    .Top = 56
+    .Left = 12
+    .ListItems.Clear
+    .ColumnHeaders.Clear
+    .ColumnHeaders.Add Text:="ID", Width:=0
+    .ColumnHeaders.Add Text:="JUGADOR", Width:=55, Alignment:=2
+    .ColumnHeaders.Add Text:="PARTIDAS", Width:=65, Alignment:=2
+    .ColumnHeaders.Add Text:="GANADAS", Width:=65, Alignment:=2
+    .ColumnHeaders.Add Text:="% GANADAS", Width:=65, Alignment:=2
+    .ColumnHeaders.Add Text:="INTENTOS", Width:=65, Alignment:=2
+    .ColumnHeaders.Add Text:="MEDIA INT.", Width:=65, Alignment:=2
+    .ColumnHeaders.Add Text:="AYUDAS", Width:=55, Alignment:=2
+    .ColumnHeaders.Add Text:="PUNTOS", Width:=67, Alignment:=2
+    .ColumnHeaders.Add Text:="PROMEDIO", Width:=60, Alignment:=2
+End With
+'
+'Añade los datos al Listview
+Sheets("Estadisticas").Select
+Dim fila as integer
+fila = 2
+     
+        Do Until Sheets("Estadisticas").Cells(fila, 1) = ""                                              
+            Set li = Userform1.ListView1.ListItems.Add(Text:=Sheets("Estadisticas").Cells(fila, 1).Value) 'id
+             li.ListSubItems.Add Text:=Sheets("Estadisticas").Cells(fila, 2).Value 'jugador
+             li.ListSubItems.Add Text:=Sheets("Estadisticas").Cells(fila, 5).Value 'total partidas
+             li.ListSubItems.Add Text:=Sheets("Estadisticas").Cells(fila, 3).Value 'ganadas
+             li.ListSubItems.Add Text:=Format(Sheets("Estadisticas").Cells(fila, 6).Value, "0%") '%ganadas
+             li.ListSubItems.Add Text:=Sheets("Estadisticas").Cells(fila, 4).Value 'intentos
+             li.ListSubItems.Add Text:=Format(Sheets("Estadisticas").Cells(fila, 7).Value, "0") 'avg intentos
+             li.ListSubItems.Add Text:=Sheets("Estadisticas").Cells(fila, 8).Value 'ayudas
+             li.ListSubItems.Add Text:=Sheets("Estadisticas").Cells(fila, 9).Value 'puntos
+             li.ListSubItems.Add Text:=Format(Sheets("Estadisticas").Cells(fila, 10).Value, "0.0") 'PROMEDIO     
+        fila = fila + 1  
+    Loop
+'   
+    If (Userform1.ListView1.ListItems.count > 0) Then
+        Userform1.ListView1.ListItems(id).Selected = True
+    Else
+        'nada
+    End If
+'
+	'Destaca en negrita la fila seleccionada
+    If (Userform1.ListView1.ListItems.Count > 0) Then
+        Userform1.ListView1.ListItems(i).Selected = True
+        Userform1.ListView1.ListItems(i).Bold = True
+        Userform1.ListView1.ListItems(1).Selected = False
+    End If
+'    
+End Sub

@@ -1,0 +1,6 @@
+Private Sub cmd_todo_Click()
+Dim F As Long
+For F = 0 To ListBox1.ListCount - 1
+  ListBox1.Selected(F) = True
+Next F
+End Sub

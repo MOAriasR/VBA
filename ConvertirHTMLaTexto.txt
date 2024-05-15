@@ -1,0 +1,25 @@
+Sub RemoveHTMLTags()
+'Update by Extendoffice 20180703
+    Dim xRg As Range
+    Dim xCell As Range
+    Dim xStr As String
+    Dim xRegEx As RegExp
+    Dim xMatch As Match
+    Dim xMatches As MatchCollection
+    Set xRegEx = New RegExp
+    Application.EnableEvents = False
+    Set xRg = Cells.SpecialCells(xlCellTypeConstants)
+    With xRegEx
+        .Global = True
+        .Pattern = "<(""[^""]*""|'[^']*'|[^'"">])*>"
+    End With
+    For Each xCell In xRg
+        xStr = xCell.Value
+            Set xMatches = xRegEx.Execute(xCell.Text)
+            For Each xMatch In xMatches
+                xStr = Replace(xStr, xMatch.Value, "")
+            Next
+        xCell.Value = xStr
+    Next
+   Application.EnableEvents = True
+End Sub

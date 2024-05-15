@@ -1,0 +1,17 @@
+Private Sub CommandButton4_Click()
+'si no hay ítem seleccionado sale
+If Me.ListBox1.ListIndex = -1 Then Exit Sub
+'
+With ListBox1
+    ListBox2.AddItem .List(.ListIndex, 0)
+'    .RemoveItem .ListIndex     'elimina el item del listbox1
+'    .ListIndex = -1
+End With
+'
+'opcional: selecciona todos los ítems del listbox2
+Dim F As Long
+For F = 0 To ListBox2.ListCount - 1
+  ListBox2.Selected(F) = True
+Next F
+'
+End Sub

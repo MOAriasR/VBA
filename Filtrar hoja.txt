@@ -1,0 +1,11 @@
+Sheets("hoja1").Select
+If ActiveSheet.FilterMode Then ActiveSheet.ShowAllData
+'
+    Dim uf As Integer
+    uf = ActiveSheet.Range("E" & Rows.Count).End(xlUp).Row
+'
+ActiveSheet.Range("B4:H30000").Autofilter Field:=6, Criteria1:="="
+'filtros múltiples
+Selection.Autofilter Field:=1, Criteria1:=ruta, Operator:=xlFilterValues
+Selection.Autofilter Field:=2, Criteria1:=dia, Operator:=xlFilterValues
+Selection.Autofilter Field:=5, Criteria1:=frec, Operator:=xlFilterValues

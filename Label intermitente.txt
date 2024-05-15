@@ -1,0 +1,19 @@
+El siguiente ejemplo alterna colores de fondo y texto entre amarillo-rojo durante 10 segundos
+de un control "Label1" cuando se activa el formulario...
+
+Private Sub UserForm_Activate()
+  Dim ShowTime As Single
+  ShowTime = Timer + 10
+  Do While ShowTime > Timer
+    If (ShowTime - Timer) Mod 2 = 0 Then
+      Label1.BackColor = QBColor(4)
+      Label1.ForeColor = QBColor(14)
+    Else
+      Label1.BackColor = QBColor(14)
+      Label1.ForeColor = QBColor(4)
+    End If
+    Me.Repaint
+  Loop
+  Label1.BackColor = &H8000000F
+  Label1.ForeColor = &H80000012
+End Sub

@@ -1,0 +1,23 @@
+Sub CopyPaste()
+
+    'crear variables
+    Dim deRango As Range           'rango a copiar
+    Dim rangoDestino As Range      'rango donde pegar
+    
+        'iniciar variables
+        Set deRango = Worksheets("Promedios").Range("A8", Range("A8").End(xlDown))
+        Set rangoDestino = Worksheets("Promedios").Range("B8")
+        
+        'rango a copiar
+        deRango.Copy
+        'rango destino para pegar
+        rangoDestino.Cells(1, 1).PasteSpecial Paste:=xlPasteValues
+        
+            Set deRango = Worksheets("Promedios").Range("G8", Range("G8").End(xlDown))
+            Set rangoDestino = Worksheets("Promedios").Range("H8")
+            
+            deRango.Copy
+            rangoDestino.Cells(1, 1).PasteSpecial Paste:=xlPasteValues
+                    Application.CutCopyMode = False
+
+End Sub

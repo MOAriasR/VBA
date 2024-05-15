@@ -1,0 +1,30 @@
+Private Sub cmd_Edit_Click()
+Application.ScreenUpdating = False
+'antes se debe enviar el item seleccionado en el listbox a una variable pública
+'
+If Palabra = "" Then
+    MsgBox "Debes seleccionar una palabra", vbExclamation, "Seleccionar palabra"
+    Exit Sub
+End If
+'
+Sheets("BaseDatos").Select
+ActiveSheet.Range("A2").Select
+Range(Selection, Selection.End(xlDown)).Select
+'
+Cells.Find(What:=Palabra, After:=ActiveCell, LookIn:=xlValues, _
+LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext, _
+MatchCase:=False, SearchFormat:=False).Activate
+'
+ActiveCell.Offset(0, 0).Select
+'
+Dim CambiarPor As String
+CambiarPor = InputBox("Introduce la palabra correcta", "Editar", Palabra)
+'
+ActiveCell.Offset(0, 0).Value = CambiarPor
+MsgBox "Palabra '" & CambiarPor & "' editada correctamente", vbInformation, "Editar palabra"
+'
+Call ListBorrar 'llenar listbox
+Me.txt_Nombre.Text = "Introduce palabra"
+Palabra = ""         
+Application.ScreenUpdating = True
+End Sub

@@ -1,0 +1,13 @@
+'Poner esta subrutina en el evento Workbook_Open
+
+Dim Nombre, Descripcion As String
+Dim Categoria As Variant
+Dim DescArgumentos(1, 2) As String
+
+Nombre = "PerQuincenal"
+Descripcion = "Convierte el número de quincena en un texto descriptivo del período"
+Categoria = "Personalizadas"
+DescArgumentos(1) = "Es el año del período, puedes teclearlo ó señalar una celda que contenga el valor"
+DescArgumentos(2) = "Es el número de quincena, de preferencia señala la celda que tiene dicho valor"
+
+Application.MacroOptions Nombre, Descripcion, , , , , Categoria, , , , DescArgumentos

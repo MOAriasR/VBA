@@ -1,0 +1,19 @@
+Sub seleccionarRango()
+'Macro para realizar una selección de un rango con CurrentRegion excepto la primera fila
+  
+    'definir rango con CurrentRegion
+    Dim rg As Range
+    Set rg = Sheets("Mapa").Range("F1").CurrentRegion
+    
+    'definir variables para almacenar el n de filas y columnas
+    Dim filas As Integer, col As Integer
+    
+    'almacenar en variables el num de filas y columnas del rango seleccionado
+    filas = rg.Rows.Count
+    col = rg.Columns.Count
+    
+    'bajar una fila hacia abajo la selección, redimensionar la selección y seleccionar
+    rg.Offset(1, 0).Resize(filas - 1, col).Select
+    
+
+End Sub

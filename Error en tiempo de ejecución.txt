@@ -1,0 +1,23 @@
+'Error "13" en tiempo de ejecución = "No coinciden los tipos"
+
+If Err.Number = 13 then
+   msgbox "No coincide el tipo de dato..."
+End if
+
+
+Sub pruebaError()
+'Control de errores: superar el límite de filas de la hoja
+
+On Error GoTo Error
+    Sheets("BBDD").Select
+    ActiveSheet.Range("A2:A12").Copy
+    ActiveSheet.Range("A1048573").Select
+    ActiveSheet.Paste
+    Exit Sub
+    
+Error:
+    If Err.number = 1004 Then
+        MsgBox "Has superado el límite de filas de la hoja."
+    End If
+     
+End Sub

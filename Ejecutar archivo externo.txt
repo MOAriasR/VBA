@@ -1,0 +1,15 @@
+Private Sub btnPlay_Click()
+'Ejecuta un hipervínculo de una celda
+
+    On Error GoTo Error
+    Sheets("BaseDatos").Select
+    
+    Application.DisplayAlerts = False
+    ActiveWorkbook.FollowHyperlink ActiveCell.Offset(0, 21).Value
+ 
+    Exit Sub
+Error:
+    MsgBox "Libro no encontrado." _
+    & vbNewLine & "Asegúrate de que el libro está en la dirección correcta.", vbCritical, "Mapa"
+
+End Sub

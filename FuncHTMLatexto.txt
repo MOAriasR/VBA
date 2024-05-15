@@ -1,0 +1,28 @@
+Function StripTags(ByVal html As String) As String
+    Dim text As String
+    Dim accumulating As Boolean
+    Dim n As Integer
+    Dim c As String
+
+    text = ""
+    accumulating = True
+
+    n = 1
+    Do While n <= Len(html)
+
+        c = Mid(html, n, 1)
+        If c = "<" Then
+            accumulating = False
+        ElseIf c = ">" Then
+            accumulating = True
+        Else
+            If accumulating Then
+                text = text & c
+            End If
+        End If
+
+        n = n + 1
+    Loop
+
+    StripTags = text
+End Function

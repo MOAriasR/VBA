@@ -1,0 +1,42 @@
+Sub LlenarList()
+'
+With Userform1.Lista
+   .ColumnCount = 2
+   .ColumnHeads = False
+   .Clear
+End With
+'
+Dim Y As Long
+Dim fila As Long
+Dim uf As Integer
+uf = nReg(Sheet3, 1, 1) - 1 'function
+'
+'
+Y = 0
+For fila = 2 To uf
+    Userform1.Lista.AddItem
+    Userform1.Lista.List(Y, 0) = Sheets("Estadisticas").Cells(fila, 1).Value
+    Userform1.Lista.List(Y, 1) = Sheets("Estadisticas").Cells(fila, 2).Value
+    Y = Y + 1
+Next fila
+'
+Userform1.Lista.ListIndex = 0 'selecciona la primera fila del listbox
+'
+End Sub
+'===============================================================================
+'Método For each
+Sheets("Pivot").Select
+'
+Dim i As Integer
+Dim uf As Integer
+Dim celda As Range
+  ' 
+'Listbox con una columna
+uf = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row - 1
+ActiveSheet.Range("A3" & ":A" & uf).Select
+With Form_Report.ListBox1
+    .Clear
+    For Each celda In Selection
+        .AddItem celda.Value
+    Next
+End With

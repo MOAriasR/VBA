@@ -1,0 +1,11 @@
+Function PerSemanal(anio As Integer, sem As Integer, diainicio As Integer) As String
+Dim inicioAnio, InicioSem, finSem, inicioSemX, finSemX As Date
+
+
+inicioAnio = DateValue("1-1-" & Str(anio))
+InicioSem = inicioAnio - Weekday(inicioAnio, diainicio) + 1
+finSem = InicioSem + 6
+inicioSemX = InicioSem + (sem * 7)
+finSemX = inicioSemX + 6
+PerSemanal = "Del " & Format(inicioSemX, "d-mm-yy") & " al " & Format(finSemX, "d-mm-yy")
+End Function

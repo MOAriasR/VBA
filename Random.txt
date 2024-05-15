@@ -1,0 +1,27 @@
+Sub Random()
+
+Application.ScreenUpdating = False
+
+    Dim rango As Range, celda As Range
+    
+    Sheets("BBDD").Select
+    Set rango = ActiveSheet.Range("p2000:p4337")
+    ActiveSheet.Range("p2").Select
+    
+    
+    For Each celda In rango
+        If ActiveCell.Rows.Hidden = False Then
+            ActiveCell.Value = NumeroAleatorio(0, 1100)
+        End If
+        
+        ActiveCell.Offset(1, 0).Select
+    Next celda
+
+Application.ScreenUpdating = True
+
+End Sub
+'_______________________________________________________________________________
+
+Function NumeroAleatorio(Inferior As Long, Superior As Long) As Integer
+    NumeroAleatorio = Int((Superior - Inferior + 1) * Rnd() + Inferior)
+End Function

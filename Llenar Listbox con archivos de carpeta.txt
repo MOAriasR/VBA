@@ -1,0 +1,37 @@
+Sub ListarFicherosCarpeta()
+'Llenar listbox con el nombre de los ficheros de una carpeta
+Dim Ruta As String
+
+'Creamos el objeto FileSystemObject que proporciona acceso al sistema de archivos del equipo
+Set fso = CreateObject("Scripting.FileSystemObject")
+'Indicamos la ruta donde están los archivos
+Ruta = "C:\Users\Juan\Documents\Excel\BaseDatos\Macros\"
+'definimos dos variables donde almacenaremos el nombre de la carpeta y los ficheros que haya dentro
+Set carpeta = fso.GetFolder(Ruta)
+Set ficheros = carpeta.Files
+
+Dim Y As Integer
+Y = 0
+
+with UserForm1.Lista
+   .ColumnCount = 2
+   .ColumnHeads = False
+   .Clear
+End With
+
+For Each Archivo In ficheros
+    UserForm1.Lista.AddItem
+    UserForm1.Lista.List(Y, 0) = Y
+    UserForm1.Lista.List(Y, 1) = Archivo.Name
+    Y = Y + 1
+Next Archivo
+
+contador = UserForm1.Lista.ListCount
+
+'Limpiamos los objetos y variables definidas
+Set fso = Nothing
+Set carpeta = Nothing
+Set ficheros = Nothing
+
+Application.ScreenUpdating = True
+End Sub

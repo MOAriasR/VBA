@@ -1,0 +1,23 @@
+Sub buscarArchivo()
+'Filtra un listbox que contiene el nombre de archivos de una carpeta según texto de un textbox
+Set fso = CreateObject("Scripting.FileSystemObject")
+Ruta = "C:\Users\Juan\Documents\Excel\BaseDatos\Macros\"
+
+Set carpeta = fso.GetFolder(Ruta)
+Set ficheros = carpeta.Files
+
+UserForm1.Lista.Clear
+
+For Each Archivo In ficheros
+    If UCase(Archivo.Name) Like "*" & UCase(UserForm1.TextBox1.Text) & "*" Then
+        UserForm1.Lista.AddItem
+        UserForm1.Lista.List(Y, 0) = Y
+        UserForm1.Lista.List(Y, 1) = Archivo.Name
+        Y = Y + 1
+    End If
+Next Archivo
+
+contador = UserForm1.Lista.ListCount
+UserForm1.Label1.Caption = "Total files found: " & contador
+
+End Sub

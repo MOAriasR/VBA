@@ -1,0 +1,7 @@
+'selecciona la fila total del listbox
+    For i = 0 To Me.ListBox1.ListCount - 1   
+        If Me.ListBox1.List(i, 0) = "Total" Then
+            Me.ListBox1.ListIndex = i
+            Exit For
+        End If
+    Next i

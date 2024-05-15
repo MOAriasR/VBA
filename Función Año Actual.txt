@@ -1,0 +1,6 @@
+Sub anyoActual()
+
+    Dim Anyo As Integer
+    Anyo = Year(Date)
+
+End Sub

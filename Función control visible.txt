@@ -1,0 +1,11 @@
+Option Explicit
+Public Function txtVisible(xtag As String, xForm As UserForm)
+    Dim xCtrl As Control
+    'pone todos los controles con el tag asignado en "Visible=true"
+    For Each xCtrl In xForm.Controls
+        If xCtrl.Tag = xtag Then
+            xCtrl.Visible = True
+        End If
+    Next
+    
+End Function

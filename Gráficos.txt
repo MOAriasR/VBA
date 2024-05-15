@@ -1,0 +1,8 @@
+    Dim grafico As Chart
+    Set grafico = Sheets("Estadisticas").ChartObjects("Chart 1").Chart
+    ActiveSheet.ChartObjects("Chart 1").Activate
+    NombreGIF1 = ThisWorkbook.Path & "\Graph1.gif"
+    grafico.Export Filename:=NombreGIF1, Filtername:="GIF"
+    Form_Graph.Image1.Picture = LoadPicture(NombreGIF1)
+'
+    Form_Graph.Repaint

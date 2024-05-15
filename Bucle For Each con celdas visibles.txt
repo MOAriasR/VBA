@@ -1,0 +1,11 @@
+    ActiveSheet.Range("Q2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Set rg = Selection.SpecialCells(xlCellTypeVisible)
+    
+    For Each celda In rg
+        If celda.Value = "No" Then
+            MsgBox "Existen facturas pendientes de cobro." _
+            & vbNewLine & "No es posible eliminar el cliente.", vbExclamation, "JB"
+            Exit Sub
+        End If
+    Next celda

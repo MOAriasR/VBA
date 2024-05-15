@@ -1,0 +1,16 @@
+'lanza inputbox solicitando código cliente
+Dim myNum As Variant
+myNum = Application.InputBox("Introduce un código de cliente")
+'
+    If myNum = vbNullString Then
+        MsgBox ("Búsqueda cancelada")
+        Exit Sub
+    End If
+'
+Sheets("Base_Datos").Select
+    Columns("B:B").Select
+    Selection.Find(What:=myNum, After:=ActiveCell, LookIn:=xlValues, LookAt _
+        :=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext, MatchCase:= _
+        False, SearchFormat:=False).Activate
+'        
+Me.textbox1.Value = myNum

@@ -1,0 +1,7 @@
+Function LibroAbierto(nombre As String) As Boolean
+'Devuelve True si el libro se encuentra abierto
+Dim x As Workbook
+On Error Resume Next
+Set x = Workbooks(nombre)
+If Err = 0 Then LibroAbierto = True Else LibroAbierto = False
+End Function

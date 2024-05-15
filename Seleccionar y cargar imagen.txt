@@ -1,0 +1,26 @@
+Sub cargarMi_imagen()
+
+    Dim archivo As Long
+   
+    With Application.FileDialog(msoFileDialogOpen)
+        .AllowMultiSelect = False
+        .Show
+        ' Muestra los paths para cada archivo seleccionado
+        For archivo = 1 To .SelectedItems.Count
+            miImagen = .SelectedItems(archivo)
+        Next archivo
+    End With
+    
+    Worksheets("Settings").Range("CeldaImagen").Value = miImagen
+        
+    On Error GoTo etiqueta
+    FormPrincipal.ImgCover.Picture = LoadPicture(miImagen)
+    Exit Sub
+    
+etiqueta:
+    Dim ruta As String
+    ruta = ActiveWorkbook.Path & "\Covers\"
+    FormPrincipal.ImgCover.Picture = LoadPicture(ruta & "default.jpg")
+
+
+End Sub

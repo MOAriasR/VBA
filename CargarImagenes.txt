@@ -1,0 +1,10 @@
+Macros Imágenes
+En una hoja
+
+Sub importarimagen()
+ActiveSheet.Shapes.AddPicture "C:\Users\OSCAR\Downloads\exportar.png", False, True, 100, 100, 70, 70
+End Sub
+
+En una forma:
+
+me.imagen1.picture=loadpicture(ruta)& archivo.jpg

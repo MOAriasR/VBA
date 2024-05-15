@@ -1,0 +1,18 @@
+Private Sub Img_Mapa_Click()
+'
+If Me.txt_localidad.Text = "" Or Me.cbo_provincia.Value = "" Then
+    MsgBox "Sin información de Localidad y/o provincia no es posible ubicar el registro en el mapa.", vbExclamation, "Mapa"
+    Exit Sub
+End If
+'
+Dim Mapa As String
+'
+Mapa = "http://maps.google.es/maps?saddr=" & Me.txt_calle.Text & ", " & _
+        Me.txt_cp.Text & " " & Me.txt_localidad.Text & ", " & Me.cbo_provincia.Value
+'
+With Form_WebBrowser
+   .Show
+   .WebBrowser1.Navigate2 Mapa
+End With
+
+End Sub

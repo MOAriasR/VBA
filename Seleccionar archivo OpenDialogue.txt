@@ -1,0 +1,17 @@
+'Cargar imagen como fondo de formulario
+'
+        Dim archivo As Long
+        Dim foto As String
+'               
+            With Application.FileDialog(msoFileDialogOpen)
+                .AllowMultiSelect = False
+                .Show
+         
+                ' Display paths of each file selected
+                For archivo = 1 To .SelectedItems.Count
+                    foto = .SelectedItems(archivo)
+                Next archivo
+         
+            End With
+        
+        Me.Picture = LoadPicture(foto)

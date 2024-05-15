@@ -1,0 +1,77 @@
+Sub LlenarCalendario1()
+
+
+' configuración ListView
+With Form_Mensual.ListView1
+    .Gridlines = False
+    .View = lvwReport
+    .FullRowSelect = True
+    .Height = 74
+    .Top = 56
+    .Left = 12
+    .ListItems.Clear
+    .ColumnHeaders.Clear
+    .ColumnHeaders.Add Text:="SEM", Width:=25
+    .ColumnHeaders.Add Text:="L", Width:=15, Alignment:=2
+    .ColumnHeaders.Add Text:="M", Width:=15, Alignment:=2
+    .ColumnHeaders.Add Text:="X", Width:=15, Alignment:=2
+    .ColumnHeaders.Add Text:="J", Width:=15, Alignment:=2
+    .ColumnHeaders.Add Text:="V", Width:=15, Alignment:=2
+    .ColumnHeaders.Add Text:="S", Width:=15, Alignment:=2
+    .ColumnHeaders.Add Text:="D", Width:=15, Alignment:=2
+End With
+
+'Añade los datos al Listview
+Sheets("CAL").Select
+Dim fila as integer
+fila = 3
+
+        Do Until fila = 9
+            Set li = Form_Mensual.ListView1.ListItems.Add(Text:=Sheets("Cal").Cells(fila, 9).Value) 'semana
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 10).Value 'L
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 11).Value 'M
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 12).Value 'X
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 13).Value 'J
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 14).Value 'V
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 15).Value 'S
+             li.ListSubItems.Add Text:=Sheets("Cal").Cells(fila, 16).Value 'D
+
+        fila = fila + 1
+        Loop
+    
+Dim x As Integer    'filas del Listview
+Dim y As Integer    'columnas del Listview
+'
+Dim MesActual As String
+MesActual = Worksheets("Cal").Range("C10").Value
+'
+Dim AnyoActual As String
+AnyoActual = Worksheets("Cal").Range("E10").Value
+'
+Dim AnyoSel As String
+AnyoSel = Worksheets("Cal").Range("D3").Value
+'
+Dim dia As String
+dia = Worksheets("Cal").Range("D10").Value
+
+            With Form_Mensual
+
+            For X = 1 To .ListView1.ListItems.Count
+                For Y = 1 To .ListView1.ColumnHeaders.Count - 1
+                    If .ListView1.ListItems.Item(X).ListSubItems(Y).Text = Dia And .lbl_Mes.Caption = MesActual And .lbl_Anyo.Caption = AnyoActual Then
+                       .ListView1.ListItems.Item(X).ForeColor = &H8000&
+                        .ListView1.ListItems.Item(X).Bold = True
+                       .ListView1.ListItems.Item(X).ListSubItems(Y).ForeColor = vbBlue
+                        .ListView1.ListItems.Item(X).ListSubItems(Y).Bold = True
+                    Else
+                        .ListView1.ListItems.Item(X).ForeColor = vbBlack
+                        .ListView1.ListItems.Item(X).ListSubItems(Y).ForeColor = vbBlack
+                    End If
+                Next Y
+            Next X
+            
+End With
+    
+End Sub
+
+

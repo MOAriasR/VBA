@@ -1,0 +1,31 @@
+Private Sub ListBox3_Click()
+'
+For i = 0 To ListBox3.ListCount - 1
+      If ListBox3.Selected(i) = True Then
+        On Error Resume Next
+        id = ListBox3.List(i)
+            If id = 0 Then
+                MsgBox "Debes seleccionar un jugador de la lista", vbExclamation, "Seleccionar jugador"
+                Exit Sub
+            End If
+      End If
+    Next i
+'
+Sheets("Estadisticas").Select
+ActiveSheet.Range("A1").Select
+Range(Selection, Selection.End(xlDown)).Select
+'
+Cells.Find(What:=id, After:=ActiveCell, LookIn:=xlValues, _
+LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext, _
+MatchCase:=False, SearchFormat:=False).Activate
+'
+ActiveCell.Offset(0, 0).Select
+nombre = ActiveCell.Offset(0, 1).Value
+'
+On Error GoTo etiqueta
+Me.Image4.Picture = LoadPicture(ThisWorkbook.Path & "\Avatar\" & id & ".jpg")
+Exit Sub
+'
+etiqueta:
+Me.Image4.Picture = LoadPicture(ThisWorkbook.Path & "\Avatar\" & "Default.ico")
+End Sub

@@ -1,0 +1,90 @@
+Sub ListCal()
+
+    Dim nCol As Byte
+    Dim nFecha As Date
+    
+    
+    Application.ScreenUpdating = False
+    On Error Resume Next
+    
+    Sheets("BBDD").Select
+    If ActiveSheet.FilterMode Then ActiveSheet.ShowAllData
+    
+    Dim i As Byte
+    Dim lista As Byte
+    lista = 1
+    
+    Dim uf As Integer
+    uf = nReg(Hoja3, 1, 1) - 1
+    
+    Dim Rango As Range
+    Set Rango = Worksheets("BBDD").Range("E2:E" & uf)
+    Dim cell As Range
+    
+    nCol = 40
+    nEtiq = 1
+    
+    'llena los 42 listboxes
+    For i = 1 To 42
+        
+        nFecha = Format(Worksheets("Cal").Cells(1, nCol).Value, "dd/mm/yyyy")
+        
+        If nFecha <> "" Then
+            With Form_Mensual.Controls("Listbox" & lista)
+                .Clear
+                .ColumnCount = 3
+                .Left = -2
+                .Width = 86
+                .ColumnWidths = "0; 28; 54"
+                                
+                For Each cell In Rango.Cells
+                    If cell.Value = nFecha Then
+                        cell.Select
+                        .AddItem cell.Offset(0, -4).Value
+                        .List(.ListCount - 1, 1) = Format(cell.Offset(0, 1).Value, "hh:mm")
+                        .List(.ListCount - 1, 2) = cell.Offset(0, 3).Value
+                    End If
+                
+                Next cell
+             
+            End With
+                        
+        End If
+        
+        nCol = nCol + 1
+        lista = lista + 1
+
+    Next i
+    
+    Application.ScreenUpdating = True
+
+End Sub
+
+
+Sub Llenarlabels()
+
+    Dim nLabel As Byte
+    Dim nCol As Byte
+    Dim nFila As Byte
+    
+    Dim i, j As Byte
+        
+    nLabel = 1
+    nCol = 10
+    nFila = 3
+    
+    'días
+    For j = 1 To 6
+        
+        For i = 1 To 7
+            Form_Cal.Controls("lbl_" & nLabel).Caption = Worksheets("Cal").Cells(nFila, nCol).Value
+            nCol = nCol + 1
+            nLabel = nLabel + 1
+        Next i
+        
+        nCol = 10
+        nFila = nFila + 1
+        
+    Next j
+		
+end sub

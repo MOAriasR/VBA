@@ -1,0 +1,7 @@
+Sub usoCommandBar()
+'Procedimiento que ejecuta comandos de la barra (Ribbon). En este ejemplo inserta una tabla dinámica
+
+    'Entre paréntesis el nombre de la opción - ver imagen en hoja1
+    Application.CommandBars.ExecuteMso ("PivotTableInsert")
+
+End Sub

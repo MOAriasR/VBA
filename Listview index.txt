@@ -1,0 +1,5 @@
+Private Sub ListView1_ItemClick(ByVal Item As MSComctlLib.ListItem)
+'Devuelve el valor de la fila seleccionada de un listview
+Dim i As Integer
+i = Item.Index
+End Sub

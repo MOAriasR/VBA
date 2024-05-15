@@ -1,0 +1,20 @@
+Private Sub cmdCopy_Click()
+'después de seleccionar filas en el listbox, éstas se copian en el portapapeles
+'
+Dim strList As String
+Dim i As Integer
+For i = 0 To Me.ListBox1.ListCount - 1
+   If Me.ListBox1.Selected(i) = True Then
+      If Len(Trim(Me.ListBox1.List(i))) > 0 Then ' blank values excluded here
+         strList = strList & Trim(Me.ListBox1.List(i)) & " " & vbNewLine '
+      End If
+   End If
+Next i
+'
+Dim MyData As DataObject
+Set MyData = New DataObject
+MyData.Clear
+MyData.SetText Trim(strList)
+MyData.PutInClipboard
+
+End Sub

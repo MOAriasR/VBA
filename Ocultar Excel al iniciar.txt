@@ -1,0 +1,27 @@
+Private Sub Workbook_Open()
+ThisWorkbook.Application.Visible = False
+Form_Menu.Show
+End Sub
+
+
+
+'API para eliminar el marco y el caption del form menú
+'Poner en el módulo del formulario
+Private Declare Function FindWindow Lib "User32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+Private Declare Function GetWindowLong Lib "User32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
+Private Declare Function SetWindowLong Lib "User32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+Private Declare Function DrawMenuBar Lib "User32" (ByVal hwnd As Long) As Long
+
+
+Private Sub UserForm_Initialize()
+'eliminar el marco y el caption del formulario
+    Dim lStyle As Long
+    Dim hMenu As Long
+    Dim mhWndForm As Long
+        
+    mhWndForm = FindWindow("ThunderDFrame", Me.Caption)
+    lStyle = GetWindowLong(mhWndForm, -16)
+    lStyle = lStyle And Not &HC00000
+    SetWindowLong mhWndForm, -16, lStyle
+    DrawMenuBar mhWndForm
+End Sub

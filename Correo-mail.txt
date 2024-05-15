@@ -1,0 +1,39 @@
+Public vPID As Variant
+'=========================================================================
+Public Sub OpenApplication()
+    'Launch application if not already open
+    If vPID = 0 Then 'Application not already open
+101:
+        vPID = Shell("C:\Program Files (x86)\Microsoft Office\Office15\Outlook.exe", vbNormalFocus)
+    Else 'Application already open so reactivate
+        On Error GoTo 101
+        AppActivate (vPID)
+    End If
+End Sub
+'=========================================================================
+Sub EnviarCorreo()
+Application.DisplayAlerts = False
+'
+Dim appOutlook As Outlook.Application
+Dim mensaje As Outlook.MailItem
+Set appOutlook = CreateObject("outlook.application")
+Set mensaje = appOutlook.CreateItem(olMailItem)
+With mensaje
+    .Subject = "Situación Inicial"
+    .Body = " Adjunto Resumen Distrito de la situación inicial: "
+    .BodyFormat = olFormatHTML
+'    .Recipients.Add ("Juan.barrionuevo@pepsico.com")
+'    .Recipients.Add ("Nombre2")
+'    .Attachments.Add ThisWorkbook.Path & "\" & ThisWorkbook.Name
+    .Display
+'    .Send
+End With
+'appOutlook.Quit
+'Set appOutlook = Nothing
+Application.DisplayAlerts = True
+End Sub
+'=========================================================================
+Sub correo()
+'Application.ActivateMicrosoftApp xlMicrosoftMail
+AppActivate "Inbox - Juan.Barrionuevo@pepsico.com - Outlook", olMaximized
+End Sub

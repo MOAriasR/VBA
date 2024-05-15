@@ -1,0 +1,11 @@
+Option Explicit
+Public Function nReg(Hoja As Worksheet, nFila As Long, nColumna As Integer)
+'
+'Función que permite identificar el número de filas de una hoja determinada
+
+    Do Until IsEmpty(Hoja.Cells(nFila, nColumna))
+        nFila = nFila + 1
+    Loop
+    nReg = nFila 'partiendo de una celda determinada, devuelve el número de la primera celda vacía que encuentra
+'
+End Function

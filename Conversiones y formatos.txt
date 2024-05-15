@@ -1,0 +1,20 @@
+Sub conversiones()
+
+Range("C3").Value = CDate(Range("B3").Value)                           	'Convertir a formato fecha
+Range("C4").Value = CInt(Range("B4").Value)                             'Convertir a num entero
+Range("C5").Value = CLng(Range("B5").Value)                             'Convertir a num long
+Range("C5").Value = CDbl(Range("B5").Value)                             'Convertir a num decimal
+Range("C6").Value = CStr(12) + CStr(12)                                 'Convertir a texto
+Range("C7").Value = Format(Range("B7").Value, "currency")          	'Convertir a moneda
+Range("C8").Value = Val(Range("B8").Value)                              'Convertir a valor num
+Range("C10").Value = FormatNumber(Range("B10").Value, 2)           	'Convertir a número con 2 decimales
+Range("c10").Value = Val(Range("c10").Value)
+Range("C11").Value = FormatCurrency(Range("B11").Value, 2)              'Convertir a moneda con 2 decimales
+Range("C12").Value = FormatDateTime(Range("B12").Value, vbLongDate)     'Convertir a formato fecha larga
+Range("C13").Value = FormatPercent(Range("B13").Value, 0)               'Convertir a porcentaje 0 decimales
+Range("C14").Value = IsNumeric(Range("B14").Value)                      'Evalúa si es numérico
+Range("C15").Value = IsDate(Range("B15").Value)                         'Evalúa si es fecha
+Range("C16").Value = IsEmpty(Range("B16").Value)                        'Evalúa si está vacío
+Range("C17").Value = IsError(Range("B17").Value)                        'Evalúa si es error
+
+End Sub

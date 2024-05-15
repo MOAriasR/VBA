@@ -1,0 +1,8 @@
+Workbooks.OpenText ThisWorkbook.Path & "\" & "EXPORT.TXT", _
+        Origin:=28605, StartRow:=1, DataType:=xlFixedWidth, FieldInfo:=Array( _
+        Array(0, 1), Array(6, 1), Array(13, 1), Array(65, 1), Array(96, 1), Array(101, 1), Array( _
+        106, 1), Array(111, 1), Array(114, 1), Array(119, 1), Array(123, 1), Array(127, 1), Array( _
+        131, 1), Array(135, 1), Array(139, 1), Array(149, 1), Array(169, 1)), _
+        TrailingMinusNumbers:=True
+'
+    Windows("EXPORT.TXT").Activate

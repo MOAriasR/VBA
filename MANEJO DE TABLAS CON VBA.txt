@@ -1,0 +1,9 @@
+ActiveSheet.ListObjects("NombreDeMiTabla").Range.Select
+ActiveSheet.ListObjects("NombreDeMiTabla").DataBodyRange.Select
+ ActiveSheet.ListObjects("NombreDeMiTabla").HeaderRowRange.Select
+ActiveSheet.ListObjects("NombreDeMiTabla").TotalsRowRange.Select
+
+ActiveSheet.ListObjects("NombreDeMiTabla").ListColumns(3).Range.Select
+ActiveSheet.ListObjects("NombreDeMiTabla").ListRows(4).Range.Select
+ActiveSheet.ListObjects("NombreDeMiTabla").HeaderRowRange(3).Select
+ActiveSheet.ListObjects("NombreDeMiTabla").DataBodyRange(3, 2).Select

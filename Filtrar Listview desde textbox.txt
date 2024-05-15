@@ -1,0 +1,33 @@
+Private Sub TextBox1_Change()
+
+Me.TextBox1.ForeColor = &H80000008
+
+Dim fila As Long
+Dim apellido As String
+Dim li As Variant
+
+Dim uf As Integer
+uf = nReg(Sheet1, 1, 1) 'function
+
+Sheets("BaseDatos").AutoFilterMode = False
+Me.ListView1.ListItems.Clear
+
+For fila = 2 To uf
+    apellido = Sheets("BaseDatos").Cells(fila, 3).Value
+    If UCase(apellido) Like "*" & UCase(Me.TextBox1.Value) & "*" Then
+        Set li = Me.ListView1.ListItems.Add(Text:=Sheets("BaseDatos").Cells(fila, "A").Text) 'ID
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "B").Text) 'nombre
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "C").Text) 'apellidos
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "D").Text) 'categoría
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "E").Text) 'calle
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "F").Text) 'cp
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "G").Text) 'localidad
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "I").Text) 'móvil
+        li.ListSubItems.Add Text:=Format(Sheets("BaseDatos").Cells(fila, "L").Text) 'mail
+    End If
+    
+Next fila
+        
+        Me.txt_registros = Me.ListView1.ListItems.Count
+        
+End Sub

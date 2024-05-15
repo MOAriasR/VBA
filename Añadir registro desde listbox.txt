@@ -1,0 +1,65 @@
+Private Sub CommandButton1_Click()
+If Userform1.txt_Nombre.Text = "" Then
+    MsgBox "Debes introducir un nombre.", vbExclamation, "Nuevo jugador"
+    Exit Sub
+End If
+'
+'chequea que el nombre introducido no exista
+Dim z As Variant
+'
+On Error Resume Next
+For z = 0 To Userform1.Lista.ListCount - 1
+    If UCase(Userform1.txt_Nombre.Text) = UCase(Userform1.Lista.List(z, 1)) Then
+        MsgBox "El nombre del jugador ya existe. Introduce otro.", vbCritical, "Error"
+        Userform1.txt_Nombre.Text = ""
+        Userform1.txt_Nombre.SetFocus
+        Exit Sub
+    End If
+Next z
+'
+Dim identificador As Variant
+Dim Nom As String
+Nom = Userform1.txt_Nombre.Value
+'
+On Error Resume Next
+Sheets("Estadisticas").Select
+'
+'evalúa si la primera celda de la base de datos está vacía
+'si está vacía, será el primer registro de la base de datos
+'si no, saltará al else
+
+    If ActiveSheet.Range("A2").Value = "" Then
+        ActiveSheet.Range("A2").Select
+        ActiveCell.Offset(0, 0).Value = 1
+        identificador = ActiveCell.Offset(0, 0).Value
+        ActiveCell.Offset(0, 1).Select
+        ActiveCell.FormulaR1C1 = Nom
+    Else
+        ActiveSheet.Range("A1").End(xlDown).Select
+        ActiveCell.Offset(1, 0).Select
+        ActiveCell.Offset(0, 0).Value = ActiveSheet.Range("Next_ID").Value + 1
+        identificador = ActiveCell.Offset(0, 0).Value
+        ActiveCell.Offset(0, 1).Select
+        ActiveCell.FormulaR1C1 = Nom
+    End If
+'
+id = identificador
+'
+'añade una imagen al registro introducido
+On Error GoTo etiqueta
+Userform1.Image2.Picture = LoadPicture(ThisWorkbook.Path & "\Avatar\" & id & ".jpg")
+MsgBox "El jugador " & Nom & " se ha añadido correctamente", vbInformation, "Nuevo jugador"
+'
+Userform1.txt_Nombre.Text = ""
+Userform1.txt_Nombre.SetFocus
+Exit Sub
+'
+etiqueta:
+Userform1.Image2.Picture = LoadPicture(ThisWorkbook.Path & "\Avatar\" & "Default.ico")
+MsgBox "El jugador " & Nom & " se ha añadido correctamente", vbInformation, "Nuevo jugador"
+'
+Userform1.txt_Nombre.Text = ""
+Userform1.txt_Nombre.SetFocus
+Exit Sub
+
+End Sub

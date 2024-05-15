@@ -1,0 +1,61 @@
+Private Sub txt_nombre_Change()
+'
+If Me.txt_nombre.Text = "" Then Exit Sub
+If Me.txt_nombre.Text = "Introduce palabra" Then Exit Sub
+'
+Me.txt_nombre.ForeColor = &H80000008
+'
+Dim Y As Long
+Dim fila As Long
+Dim nombre As String
+'
+Dim uf As Integer
+uf = nReg(Sheet1, 1, 1) 'function
+'
+Me.ListBox_borrar.Clear
+'
+Y = 0
+'
+For fila = 2 To uf
+    nombre = Sheets("BaseDatos").Cells(fila, 1).Value
+    If UCase(nombre) Like "*" & UCase(Me.txt_nombre.Value) & "*" Then
+        Me.ListBox_borrar.AddItem
+        Me.ListBox_borrar.List(Y, 0) = Sheets("BaseDatos").Cells(fila, 1).Value
+        Y = Y + 1
+    End If
+    
+Next
+
+End Sub
+'==============================================================================================
+'OTRO EJEMPLO PARA MÁS COLUMNAS
+Private Sub txt_nombre_Change()
+Me.txt_nombre.ForeColor = &H80000008
+'
+Dim Y As Long
+Dim fila As Long
+Dim nombre As String
+'
+Dim uf As Integer
+uf = nReg(Sheet1, 1, 1) 'function
+'
+Sheets("BaseDatos").AutoFilterMode = False
+Me.Lista.Clear
+'
+Y = 0
+
+For fila = 2 To uf
+    nombre = Sheets("BaseDatos").Cells(fila, 2).Value
+    If UCase(nombre) Like "*" & UCase(Me.txt_nombre.Value) & "*" Then
+        Me.Lista.AddItem
+        Me.Lista.List(Y, 0) = Sheets("BaseDatos").Cells(fila, 1).Value
+        Me.Lista.List(Y, 1) = Sheets("BaseDatos").Cells(fila, 2).Value
+        Me.Lista.List(Y, 2) = Sheets("BaseDatos").Cells(fila, 3).Value
+        Me.Lista.List(Y, 3) = Sheets("BaseDatos").Cells(fila, 4).Value
+        Me.Lista.List(Y, 4) = Sheets("BaseDatos").Cells(fila, 9).Value
+        Y = Y + 1
+    End If
+    
+Next
+
+        Me.txt_registros.Text = Me.Lista.ListCount

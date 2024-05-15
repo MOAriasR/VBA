@@ -1,0 +1,27 @@
+Sub Actualizar()
+'
+Dim archivos, carpeta As String
+Dim fila, columna As Integer
+'
+carpeta = ThisWorkbook.Path & "\Macros\"
+'
+If carpeta = "" Then
+    MsgBox "No hay archivos en la carpeta Macros", vbExclamation, "Carpeta vacía"
+    Exit Sub
+Else
+    If Right(carpeta, 1) <> "\" Then
+        carpeta = carpeta & "\"
+    End If
+End If
+'
+fila = 2
+columna = 2
+'
+archivos = Dir(carpeta)
+Do While Len(archivos) > 0
+    Cells(fila, columna).Value = archivos
+    archivos = Dir()
+    fila = fila + 1
+Loop
+'
+End Sub

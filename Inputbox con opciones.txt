@@ -1,0 +1,9 @@
+    dim operacion as byte
+
+	operacion = Application.InputBox("Introduce una operación" _
+        & vbNewLine & "1 para suma" _
+        & vbNewLine & "2 para resta" _
+        & vbNewLine & "3 para multiplicación" _
+        & vbNewLine & "4 para división", titulo)
+
+    If operacion = 0 Then Exit Sub

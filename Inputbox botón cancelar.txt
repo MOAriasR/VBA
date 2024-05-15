@@ -1,0 +1,5 @@
+    
+dim num2 as integer
+
+num2 = Application.InputBox("Introduce el segundo número", titulo)
+If num2 = 0 Then Exit Sub
