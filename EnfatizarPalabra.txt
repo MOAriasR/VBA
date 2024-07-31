@@ -1,0 +1,25 @@
+Sub EnfatizarPalabra()
+    Dim palabra As String
+    Dim pos As Integer
+    Dim longPalabra As Integer
+    Dim res As Integer
+
+    ' Establece la palabra que quieres poner en negrita
+    palabra = InputBox("Teclea la palabra a negrear:")
+    
+        ' Obtén la posición de la palabra en la celda
+        pos = InStr(1, ActiveCell.Value, palabra, vbTextCompare)
+        
+        ' Si la palabra se encuentra en la celda
+        If pos > 0 Then
+            longPalabra = Len(palabra)
+            ' Aplica negrita a la palabra
+            With ActiveCell.Characters(Start:=pos, Length:=longPalabra).Font
+                .Bold = True
+                .Italic = True
+            End With
+            res = CreateObject("wscript.shell").Popup("Palabra negreada!", 1, "Negreando")
+        End If
+  
+  
+End Sub

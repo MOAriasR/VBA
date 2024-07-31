@@ -1,0 +1,39 @@
+Function Edad(FechaNacimiento As Date, Optional FechaFinal As Variant) As String
+    Dim Años As Integer
+    Dim Meses As Integer
+    Dim Días As Integer
+    Dim TempFechaFinal As Date
+
+    ' Si no se proporciona FechaFinal, usa la fecha actual
+    If IsMissing(FechaFinal) Then
+        TempFechaFinal = Date
+    Else
+        TempFechaFinal = FechaFinal
+    End If
+
+    ' Calcula los años
+    Años = DateDiff("yyyy", FechaNacimiento, TempFechaFinal)
+    If DateSerial(Year(TempFechaFinal), Month(FechaNacimiento), Day(FechaNacimiento)) > TempFechaFinal Then
+        Años = Años - 1
+    End If
+
+    ' Calcula los meses
+    Meses = DateDiff("m", FechaNacimiento, TempFechaFinal) - (Años * 12)
+    If Day(TempFechaFinal) < Day(FechaNacimiento) Then
+        Meses = Meses - 1
+    End If
+
+    ' Calcula los días
+    Días = Day(TempFechaFinal) - Day(FechaNacimiento)
+    If Días < 0 Then
+        Días = Días + Day(DateSerial(Year(TempFechaFinal), Month(TempFechaFinal) + 1, 0)) + 1
+    End If
+
+    ' Devuelve el resultado como cadena
+    Edad = Años & " años, " & Meses & " meses, " & Días & " días"
+End Function
+
+
+
+
+
